@@ -34,5 +34,5 @@ class FeedViewController: UIViewController {
 }
 
 struct Post {
-    let title:String = "Мой пост"
+    let title: String = "Мой пост"
 }

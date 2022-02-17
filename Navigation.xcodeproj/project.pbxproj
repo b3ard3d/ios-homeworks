@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		006524A627BAB65F009BC7D5 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006524A527BAB65F009BC7D5 /* ProfileHeaderView.swift */; };
 		00D7B37A27B91FD900C7E906 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D7B37927B91FD900C7E906 /* MainTabBarController.swift */; };
 		00D7B37C27B9208500C7E906 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D7B37B27B9208500C7E906 /* FeedViewController.swift */; };
 		00D7B37E27B920F200C7E906 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D7B37D27B920F200C7E906 /* InfoViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		006524A527BAB65F009BC7D5 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		00D7B37927B91FD900C7E906 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		00D7B37B27B9208500C7E906 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		00D7B37D27B920F200C7E906 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +45,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		006524A427BAB5F8009BC7D5 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				006524A527BAB65F009BC7D5 /* ProfileHeaderView.swift */,
+				00D7B38127B9216B00C7E906 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		00F327B827ABF22E009A8CE5 = {
 			isa = PBXGroup;
 			children = (
@@ -62,13 +73,13 @@
 		00F327C327ABF22E009A8CE5 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				006524A427BAB5F8009BC7D5 /* Profile */,
 				00F327C427ABF22E009A8CE5 /* AppDelegate.swift */,
 				00F327C627ABF22E009A8CE5 /* SceneDelegate.swift */,
 				00D7B37927B91FD900C7E906 /* MainTabBarController.swift */,
 				00D7B37B27B9208500C7E906 /* FeedViewController.swift */,
 				00D7B37D27B920F200C7E906 /* InfoViewController.swift */,
 				00D7B37F27B9213600C7E906 /* PostViewController.swift */,
-				00D7B38127B9216B00C7E906 /* ProfileViewController.swift */,
 				00F327CD27ABF22F009A8CE5 /* Assets.xcassets */,
 				00F327CF27ABF22F009A8CE5 /* LaunchScreen.storyboard */,
 				00F327D227ABF22F009A8CE5 /* Info.plist */,
@@ -153,6 +164,7 @@
 				00D7B37E27B920F200C7E906 /* InfoViewController.swift in Sources */,
 				00D7B38227B9216B00C7E906 /* ProfileViewController.swift in Sources */,
 				00F327C727ABF22E009A8CE5 /* SceneDelegate.swift in Sources */,
+				006524A627BAB65F009BC7D5 /* ProfileHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -118,10 +118,10 @@ final class LogInViewController: UIViewController {
     
     private func setupConstraints() {
         
-        let topConstraint = self.scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
-        let leadingConstraint = self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-        let trailingConstraint = self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        let bottomConstraint = self.scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        let topConstraint = self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor)
+        let leftConstraint = self.scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
+        let rightConstraint = self.scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+        let bottomConstraint = self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         
         let contentViewTopConstraint = self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor)
         let contentViewBottomConstraint = self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor)
@@ -145,7 +145,7 @@ final class LogInViewController: UIViewController {
         let heightLogInButtonConstraint = self.logInButton.heightAnchor.constraint(equalToConstant: 50)
         
         NSLayoutConstraint.activate([
-            topConstraint, leadingConstraint, trailingConstraint, bottomConstraint,
+            topConstraint, leftConstraint, rightConstraint, bottomConstraint,
             contentViewTopConstraint, contentViewBottomConstraint,
             contentViewWidthConstraint, contentViewHeightConstraint,
             contentViewCenterXConstraint, topLogoImageViewConstraint,

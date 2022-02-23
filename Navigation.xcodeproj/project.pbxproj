@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0045CF2E27C548590081FA60 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045CF2D27C548590081FA60 /* LogInViewController.swift */; };
 		006524A627BAB65F009BC7D5 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006524A527BAB65F009BC7D5 /* ProfileHeaderView.swift */; };
 		00D7B37A27B91FD900C7E906 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D7B37927B91FD900C7E906 /* MainTabBarController.swift */; };
 		00D7B37C27B9208500C7E906 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D7B37B27B9208500C7E906 /* FeedViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0045CF2D27C548590081FA60 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		006524A527BAB65F009BC7D5 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		00D7B37927B91FD900C7E906 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		00D7B37B27B9208500C7E906 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				006524A527BAB65F009BC7D5 /* ProfileHeaderView.swift */,
+				0045CF2D27C548590081FA60 /* LogInViewController.swift */,
 				00D7B38127B9216B00C7E906 /* ProfileViewController.swift */,
 			);
 			path = Profile;
@@ -159,6 +162,7 @@
 			files = (
 				00F327C527ABF22E009A8CE5 /* AppDelegate.swift in Sources */,
 				00D7B38027B9213600C7E906 /* PostViewController.swift in Sources */,
+				0045CF2E27C548590081FA60 /* LogInViewController.swift in Sources */,
 				00D7B37C27B9208500C7E906 /* FeedViewController.swift in Sources */,
 				00D7B37A27B91FD900C7E906 /* MainTabBarController.swift in Sources */,
 				00D7B37E27B920F200C7E906 /* InfoViewController.swift in Sources */,

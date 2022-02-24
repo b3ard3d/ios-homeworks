@@ -160,7 +160,9 @@ final class LogInViewController: UIViewController {
     
     @objc func buttonClicked() {
         let profileViewController = ProfileViewController()
-        navigationController?.pushViewController(profileViewController, animated: true)
+        if self.loginTextField.text != "" && self.passwordTextField.text != "" {
+            navigationController?.pushViewController(profileViewController, animated: true)
+        }
     }
     
     @objc private func kbdShow(notification: NSNotification) {

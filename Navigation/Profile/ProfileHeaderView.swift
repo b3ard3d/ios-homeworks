@@ -79,6 +79,8 @@ final class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.drawSelf()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
+        self.addGestureRecognizer(tap)
     }
     
     required init?(coder: NSCoder) {
@@ -103,7 +105,7 @@ final class ProfileHeaderView: UIView {
         self.topShowStatusButtonConstraintOn?.priority = UILayoutPriority(rawValue: 999)
         let leadingShowStatusButton = self.showStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
         let trailingShowStatusButton = self.showStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
-        let widthShowStatusButton = self.showStatusButton.widthAnchor.constraint(equalToConstant: 50)
+        let heightShowStatusButton = self.showStatusButton.heightAnchor.constraint(equalToConstant: 50)
         let bottomStatusTextView = self.statusTextView.bottomAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: -18)
         let leadingStatusTextView = self.statusTextView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor)
         let trailingStatusTextView = self.statusTextView.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor)
@@ -113,9 +115,13 @@ final class ProfileHeaderView: UIView {
             heightPhotoImageConstraint, topNameLabelConstraint, leadingNameLabelConstraint,
             trailingNameLabelConstraint,
             self.topShowStatusButtonConstraintOn, leadingShowStatusButton, trailingShowStatusButton,
-            widthShowStatusButton, bottomStatusTextView, leadingStatusTextView,
+            heightShowStatusButton, bottomStatusTextView, leadingStatusTextView,
             trailingStatusTextView, heightStatusTextView
         ].compactMap({ $0}))
+    }
+    
+    @objc func tap(_ sender: Any) {
+        statusTextField.resignFirstResponder()
     }
     
     @objc private func didTapShowStatusButton() {
@@ -142,6 +148,7 @@ final class ProfileHeaderView: UIView {
             self.topShowStatusButtonConstraintOff = self.showStatusButton.topAnchor.constraint(equalTo: self.photoImageView.bottomAnchor, constant: 16)
 
             NSLayoutConstraint.activate([self.topShowStatusButtonConstraintOff].compactMap({ $0 }))
+            self.endEditing(true)
         }
         self.delegate?.didTapShowStatusButton(textFieldIsVisible: self.statusTextField.isHidden) { [weak self] in
             self?.statusTextField.isHidden.toggle()

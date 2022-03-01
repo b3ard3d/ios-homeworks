@@ -97,6 +97,8 @@ final class LogInViewController: UIViewController {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(kbdShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.addObserver(self, selector: #selector(kbdHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -163,6 +165,7 @@ final class LogInViewController: UIViewController {
         if self.loginTextField.text != "" && self.passwordTextField.text != "" {
             navigationController?.pushViewController(profileViewController, animated: true)
         }
+        
     }
     
     @objc private func kbdShow(notification: NSNotification) {
@@ -172,8 +175,14 @@ final class LogInViewController: UIViewController {
         }
     }
     
+    @objc func tap(_ sender: Any) {
+        loginTextField.resignFirstResponder()
+    }
+    
     @objc private func kbdHide(notification: NSNotification) {
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
+        
+        
     }
 }

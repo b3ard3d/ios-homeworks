@@ -90,6 +90,8 @@ final class LogInViewController: UIViewController {
         view.backgroundColor = .white
         self.configureSubviews()
         self.setupConstraints()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
+        view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -163,6 +165,11 @@ final class LogInViewController: UIViewController {
         if self.loginTextField.text != "" && self.passwordTextField.text != "" {
             navigationController?.pushViewController(profileViewController, animated: true)
         }
+    }
+    
+    @objc func tap(_ sender: Any) {
+        loginTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
     }
     
     @objc private func kbdShow(notification: NSNotification) {

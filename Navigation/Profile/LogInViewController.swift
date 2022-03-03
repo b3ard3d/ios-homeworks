@@ -16,6 +16,9 @@ final class LogInViewController: UIViewController {
         return scrollView
     }()
     
+    
+
+    
     private lazy var contentView: UIView = {
             let contentView = UIView()
             contentView.backgroundColor = .white
@@ -90,6 +93,9 @@ final class LogInViewController: UIViewController {
         view.backgroundColor = .white
         self.configureSubviews()
         self.setupConstraints()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
+        view.addGestureRecognizer(tap)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,7 +104,7 @@ final class LogInViewController: UIViewController {
         nc.addObserver(self, selector: #selector(kbdShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.addObserver(self, selector: #selector(kbdHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        
+       
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -116,6 +122,7 @@ final class LogInViewController: UIViewController {
         self.contentView.addSubview(self.loginPasswordStackView)
         self.loginPasswordStackView.addArrangedSubview(self.loginTextField)
         self.loginPasswordStackView.addArrangedSubview(self.passwordTextField)
+        
     }
     
     private func setupConstraints() {
@@ -177,6 +184,7 @@ final class LogInViewController: UIViewController {
     
     @objc func tap(_ sender: Any) {
         loginTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
     }
     
     @objc private func kbdHide(notification: NSNotification) {

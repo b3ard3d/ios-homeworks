@@ -88,6 +88,8 @@ final class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.drawSelf()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
+        self.addGestureRecognizer(tap)
     }
     
     required init?(coder: NSCoder) {
@@ -124,6 +126,10 @@ final class ProfileHeaderView: UIView {
         ].compactMap({ $0}))
     }
     
+    @objc func tap(_ sender: Any) {
+            statusTextField.resignFirstResponder()
+        }
+    
     @objc private func didTapSetStatusButton() {
         if self.statusTextField.isHidden {
             self.statusTextField.alpha = 1
@@ -148,6 +154,7 @@ final class ProfileHeaderView: UIView {
             self.topSetStatusButtonOff = self.setStatusButton.topAnchor.constraint(equalTo: self.avatarImageView.bottomAnchor, constant: 16)
 
             NSLayoutConstraint.activate([self.topSetStatusButtonOff].compactMap({ $0 }))
+            self.endEditing(true)
         }
         self.delegate?.didTapShowStatusButton(textFieldIsVisible: self.statusTextField.isHidden) { [weak self] in
             self?.statusTextField.isHidden.toggle()

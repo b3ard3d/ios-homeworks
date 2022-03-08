@@ -11,7 +11,7 @@ class PostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         view.backgroundColor = .systemGray3
         let myPost = Post()
         let titleLabel = UILabel()

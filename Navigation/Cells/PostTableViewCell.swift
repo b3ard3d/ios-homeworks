@@ -150,4 +150,3 @@ class PostTableViewCell: UITableViewCell {
         self.viewsLabel.text = "Views: " + String(viewModel.views)
     }
 }
-

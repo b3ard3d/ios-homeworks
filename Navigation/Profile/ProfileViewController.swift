@@ -24,6 +24,7 @@ final class ProfileViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "ArticleCell")
         tableView.backgroundColor = .systemGray6
         tableView.layer.borderColor = UIColor.lightGray.cgColor
@@ -82,22 +83,29 @@ extension ProfileViewController: ProfileHeaderViewProtocol {
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.count
+        return self.dataSource.count + 1
     }
             
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as? PostTableViewCell else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+        if indexPath.row == 0 {
+                   let cell = tableView.dequeueReusableCell(withIdentifier: "PhotosTableViewCell", for: indexPath)
+                   return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as? PostTableViewCell else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+                return cell
+            }
+            let article = self.dataSource[indexPath.row - 1]
+            let viewModel = PostTableViewCell.ViewModel(author: article.author,
+                                                            image: article.image,
+                                                            description: article.description,
+                                                            likes: article.likes,
+                                                            views: article.views)
+            cell.setup(with: viewModel)
             return cell
         }
-        let article = self.dataSource[indexPath.row]
-        let viewModel = PostTableViewCell.ViewModel(author: article.author,
-                                                        image: article.image,
-                                                        description: article.description,
-                                                        likes: article.likes,
-                                                        views: article.views)
-        cell.setup(with: viewModel)
-        return cell
+        
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -110,5 +118,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return  250
+    }
+    
+    func tableView( _ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+        self.navigationController?.pushViewController(PhotosViewController(), animated: true)
+        } else { return }
     }
 }

@@ -76,8 +76,17 @@
 				006524A527BAB65F009BC7D5 /* ProfileHeaderView.swift */,
 				00D7B38127B9216B00C7E906 /* ProfileViewController.swift */,
 				0045CF2D27C548590081FA60 /* LogInViewController.swift */,
+				0045CF3327C666E10081FA60 /* PostTableViewCell.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		0094C4A127D6A73000D8F052 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0045CF3527C67E1E0081FA60 /* Post.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		00F327B827ABF22E009A8CE5 = {
@@ -101,13 +110,12 @@
 			children = (
 				0045CF2F27C665D20081FA60 /* AppDelegate */,
 				006524A427BAB5F8009BC7D5 /* Profile */,
+				0094C4A127D6A73000D8F052 /* Models */,
 				0045CF3027C666370081FA60 /* Resources */,
 				00D7B37927B91FD900C7E906 /* MainTabBarController.swift */,
 				00D7B37B27B9208500C7E906 /* FeedViewController.swift */,
 				00D7B37D27B920F200C7E906 /* InfoViewController.swift */,
 				00D7B37F27B9213600C7E906 /* PostViewController.swift */,
-				0045CF3327C666E10081FA60 /* PostTableViewCell.swift */,
-				0045CF3527C67E1E0081FA60 /* Post.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";

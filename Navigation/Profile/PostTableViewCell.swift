@@ -57,6 +57,9 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var imageImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.backgroundColor = .black
+        imageView.contentMode = .scaleAspectFit
+        imageView.setContentCompressionResistancePriority(UILayoutPriority(100), for: .vertical)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -107,45 +110,36 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func setupView() {
-        self.contentView.backgroundColor = .white
-        self.contentView.addSubview(self.backView)
-        self.backView.addSubview(self.stackViewPost)
-        self.stackViewPost.addArrangedSubview(self.authorLabel)
-        self.stackViewPost.addArrangedSubview(self.imageImageView)
-        self.stackViewPost.addArrangedSubview(self.descriptionLabel)
-        self.stackViewPost.addArrangedSubview(self.stackViewLikesViews)
-        self.stackViewLikesViews.addArrangedSubview(self.likesLabel)
-        self.stackViewLikesViews.addArrangedSubview(self.viewsLabel)
-        self.stackViewPost.backgroundColor = .white
-        
-        let backViewConstraints = self.backViewConstraints()
-        let stackViewPostConstraints = self.stackViewPostConstraints()
-
-        NSLayoutConstraint.activate(
-            backViewConstraints +
-            stackViewPostConstraints
-        )
+        contentView.backgroundColor = .white
+        contentView.addSubview(backView)
+        backView.addSubview(stackViewPost)
+        stackViewPost.addArrangedSubview(authorLabel)
+        stackViewPost.addArrangedSubview(imageImageView)
+        stackViewPost.addArrangedSubview(descriptionLabel)
+        stackViewPost.addArrangedSubview(stackViewLikesViews)
+        stackViewLikesViews.addArrangedSubview(likesLabel)
+        stackViewLikesViews.addArrangedSubview(viewsLabel)
+        stackViewPost.backgroundColor = .white
+        backViewConstraints()
+        stackViewPostConstraints()
     }
     
-    private func backViewConstraints() -> [NSLayoutConstraint] {
-        let topConstraint = self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor)
-        let leadingConstraint = self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor)
-        let trailingConstraint = self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
-        let bottomConstraint = self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
-        return [
-            topConstraint, leadingConstraint, trailingConstraint, bottomConstraint
-        ]
+    private func backViewConstraints() {
+        NSLayoutConstraint.activate([
+            backView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
     
-    private func stackViewPostConstraints() -> [NSLayoutConstraint] {
-        let topConstraint = self.stackViewPost.topAnchor.constraint(equalTo: self.backView.topAnchor)
-        let leadingConstraint = self.stackViewPost.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16)
-        let trailingConstraint = self.stackViewPost.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16)
-        
-        let bottomConstraint = self.stackViewPost.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor)
-        return [
-            topConstraint, leadingConstraint, trailingConstraint, bottomConstraint,
-        ]
+    private func stackViewPostConstraints() {
+        NSLayoutConstraint.activate([
+            stackViewPost.topAnchor.constraint(equalTo: backView.topAnchor),
+            stackViewPost.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 16),
+            stackViewPost.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -16),
+            stackViewPost.bottomAnchor.constraint(equalTo: backView.bottomAnchor)
+        ])
     }
     
     func setup(with viewModel: ViewModel) {        

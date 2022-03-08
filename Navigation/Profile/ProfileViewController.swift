@@ -12,36 +12,24 @@ final class ProfileViewController: UIViewController {
     private lazy var profileHeaderView: ProfileHeaderView = {
         let view = ProfileHeaderView(frame: .zero)
         view.backgroundColor = .systemGray6
-        view.delegate = self
+  //      view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "ArticleCell")
-        tableView.backgroundColor = .clear
         tableView.backgroundColor = .systemGray6
         tableView.layer.borderColor = UIColor.lightGray.cgColor
         tableView.layer.borderWidth = 0.5
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
-    }()
-    
-    private lazy var newButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Новая кнопка", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowRadius = 4
-        button.layer.shadowOpacity = 0.7
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
     }()
     
     private var heightConstraint: NSLayoutConstraint?
@@ -61,32 +49,14 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setupView() {
-        self.view.backgroundColor = .systemGray6
-        self.view.addSubview(self.profileHeaderView)
-        self.view.addSubview(self.newButton)
-        self.view.addSubview(self.tableView)
-        
-        let topConstraint = self.profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
-        let leadingConstraint = self.profileHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-        let trailingConstraint = self.profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        self.heightConstraint = self.profileHeaderView.heightAnchor.constraint(equalToConstant: 245)
-        let bottomNewButtonConstraint = self.newButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-        let leadingNewButtonConstraint = self.newButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16)
-        let trailingNewButtonConstraint = self.newButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16)
-        let heightNewButtonConstraint = self.newButton.heightAnchor.constraint(equalToConstant: 50)
-        let topTableView = self.tableView.topAnchor.constraint(equalTo: self.profileHeaderView.bottomAnchor)
-        let leftTableView = self.tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
-        let rightTableView = self.tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
-        let bottomTableView = self.tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        
-        self.newButton.isHidden = true
-        
+        view.backgroundColor = .systemGray6
+        view.addSubview(self.tableView)
         NSLayoutConstraint.activate([
-            topConstraint, leadingConstraint, trailingConstraint, self.heightConstraint,
-            bottomNewButtonConstraint, leadingNewButtonConstraint,
-            trailingNewButtonConstraint, heightNewButtonConstraint,
-            topTableView, leftTableView, rightTableView, bottomTableView
-        ].compactMap({ $0 }))
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
     private func addDataSource() {
@@ -122,11 +92,23 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
         let article = self.dataSource[indexPath.row]
         let viewModel = PostTableViewCell.ViewModel(author: article.author,
-                                                    image: article.image,
-                                                    description: article.description,
-                                                    likes: article.likes,
-                                                    views: article.views)
+                                                        image: article.image,
+                                                        description: article.description,
+                                                        likes: article.likes,
+                                                        views: article.views)
         cell.setup(with: viewModel)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var headerView = UIView()
+        if section == 0 {
+            headerView = ProfileHeaderView()
+        }
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return  250
     }
 }

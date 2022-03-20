@@ -55,11 +55,13 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var imageImageView: UIImageView = {
+     lazy var imageImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .black
         imageView.contentMode = .scaleAspectFit
         imageView.setContentCompressionResistancePriority(UILayoutPriority(100), for: .vertical)
+        
+        imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

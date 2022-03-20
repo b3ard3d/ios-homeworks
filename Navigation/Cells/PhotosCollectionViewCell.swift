@@ -8,7 +8,7 @@
 import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
-    
+        
     private lazy var backView: UIView = {
         let view = UIView()
         view.clipsToBounds = true

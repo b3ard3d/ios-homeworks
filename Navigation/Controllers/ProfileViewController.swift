@@ -8,14 +8,24 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
+  
+    private let profileHeaderView = ProfileHeaderView()
     
-    private lazy var profileHeaderView: ProfileHeaderView = {
+    
+  /*  private lazy var profileHeaderView: ProfileHeaderView = {
         let view = ProfileHeaderView(frame: .zero)
-        view.backgroundColor = .systemGray6
+     //   view.backgroundColor = .systemGray6
+        view.backgroundColor = .systemRed
   //      view.delegate = self
+   //     view.isUserInteractionEnabled = true
         view.translatesAutoresizingMaskIntoConstraints = false
+        
+  //      self.tapGestureRecognizer.addTarget(self, action: #selector(handleTapGesture(_ :)))
+        
+    //    view.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
+
         return view
-    }()
+    }()     */
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -33,6 +43,8 @@ final class ProfileViewController: UIViewController {
         return tableView
     }()
     
+    private let tapGestureRecognizer = UITapGestureRecognizer()
+    
     private var heightConstraint: NSLayoutConstraint?
     
     private var dataSource: [Posts] = []
@@ -42,6 +54,8 @@ final class ProfileViewController: UIViewController {
         self.setupNavigationBar()
         self.setupView()
         self.addDataSource()
+ 
+        self.setupGesture()
     }
     
     private func setupNavigationBar() {
@@ -51,7 +65,9 @@ final class ProfileViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemGray6
-        view.addSubview(self.tableView)
+        
+        view.addSubview(tableView)
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -66,9 +82,31 @@ final class ProfileViewController: UIViewController {
         self.dataSource.append(.init(author: "Kay May", description: "S13 в родном окрасе", image: "post3", likes: 10, views: 15))
         self.dataSource.append(.init(author: "Sport Factor", description: "Тренировки тренировками, а сон по расписанию", image: "post4", likes: 52, views: 60))
     }
+    
+    private func setupGesture() {
+        
+        tapGestureRecognizer.addTarget(self, action: #selector(handleTapGesture(_ :)))
+        
+        profileHeaderView.avatarImageView.self.addGestureRecognizer(tapGestureRecognizer)
+        profileHeaderView.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
+        profileHeaderView.statusLabel.addGestureRecognizer(tapGestureRecognizer)
+
+    }
+    
+    
+    @objc func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer){
+        guard self.tapGestureRecognizer === gestureRecognizer else { return }
+       
+        print("111111111")
+        
+        profileHeaderView.avatarImageView.layer.borderColor = UIColor.black.cgColor
+        
+        profileHeaderView.avatarImageView.image = UIImage(named: "logo")
+   //     profileHeaderView.backgroundColor = .systemBlue
+    }
 }
     
-extension ProfileViewController: ProfileHeaderViewProtocol {
+/* extension ProfileViewController: ProfileHeaderViewProtocol {
     
     func didTapShowStatusButton(textFieldIsVisible: Bool, completion: @escaping () -> Void) {
         self.heightConstraint?.constant = textFieldIsVisible ? 300 : 245
@@ -78,7 +116,7 @@ extension ProfileViewController: ProfileHeaderViewProtocol {
             completion()
         }
     }
-}
+}       */
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -102,6 +140,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                                                             likes: article.likes,
                                                             views: article.views)
             cell.setup(with: viewModel)
+            cell.contentView.isUserInteractionEnabled = false
             return cell
         }
         
@@ -109,11 +148,16 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var headerView = UIView()
+        
+ /*       var headerView = UIView()
         if section == 0 {
             headerView = ProfileHeaderView()
         }
-        return headerView
+        return headerView       */
+   //     profileHeaderView.backgroundColor = .systemRed
+        
+
+        return profileHeaderView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

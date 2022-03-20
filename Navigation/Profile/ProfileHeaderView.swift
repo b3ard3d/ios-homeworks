@@ -13,12 +13,15 @@ protocol ProfileHeaderViewProtocol: AnyObject {
 
 final class ProfileHeaderView: UIView {
     
-    private lazy var avatarImageView: UIImageView = {
+    lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "photo"))
         imageView.layer.cornerRadius = 75
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
+        
+        imageView.isUserInteractionEnabled = true
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -31,23 +34,14 @@ final class ProfileHeaderView: UIView {
         return label
     }()
     
-    private lazy var statusLabel: UILabel = {
+     lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.text = "Статус"
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .gray
+        label.isUserInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-    }()
-    
-    private lazy var statusTextView1: UITextView = {
-        let textView = UITextView()
-        textView.backgroundColor = .lightGray
-        textView.font = .systemFont(ofSize: 14)
-        textView.textColor = .gray
-        textView.text = "Статус"
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
     }()
     
     private lazy var setStatusButton: UIButton = {
@@ -73,9 +67,12 @@ final class ProfileHeaderView: UIView {
         textField.returnKeyType = .next
         textField.keyboardType = .default
         textField.clearButtonMode = .always
+        textField.alpha = 0
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
+    
+    weak var delegate: ProfileHeaderViewProtocol?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -118,13 +115,30 @@ final class ProfileHeaderView: UIView {
     
     @objc func tapKeyboardOff(_ sender: Any) {
         statusTextField.resignFirstResponder()
+        if self.statusTextField.text == "" {
+            UIView.animate(withDuration: 0.5) {
+                self.statusTextField.alpha = 0
+            } completion: { _ in
+            }
+        }
     }
     
     @objc private func didTapSetStatusButton() {
-        if self.statusTextField.text != "" {
-            self.statusLabel.text = self.statusTextField.text
-            self.statusTextField.text = .none
+       if statusTextField.alpha == 0 {
+            UIView.animate(withDuration: 0.5) {
+                self.statusTextField.alpha = 1
+            } completion: { _ in
+            }
+        } else {
+            if self.statusTextField.text != "" {
+                UIView.animate(withDuration: 0.5) {
+                    self.statusLabel.text = self.statusTextField.text
+                    self.statusTextField.text = .none
+                    self.statusTextField.alpha = 0
+                } completion: { _ in
+                }
+            }
+            endEditing(true)
         }
-        self.endEditing(true)
     }
 }

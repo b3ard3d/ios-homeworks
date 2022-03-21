@@ -152,6 +152,14 @@ final class LogInViewController: UIViewController {
         if self.loginTextField.text != "" && self.passwordTextField.text != "" {
             navigationController?.pushViewController(profileViewController, animated: true)
         }
+        if self.loginTextField.text == "" {
+       //     loginTextField.backgroundColor = .systemRed
+            loginTextField.shake()
+        }
+        if self.passwordTextField.text == "" {
+       //     loginTextField.backgroundColor = .systemRed
+            passwordTextField.shake()
+        }
     }
     
     @objc func tapKeyboardOff(_ sender: Any) {
@@ -175,3 +183,15 @@ final class LogInViewController: UIViewController {
         }
     }
 }
+
+extension UIView {
+     func shake(count : Float = 3,for duration : TimeInterval = 0.3,withTranslation translation : Float = 3) {
+         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+         animation.repeatCount = count
+         animation.duration = duration/TimeInterval(animation.repeatCount)
+         animation.autoreverses = true
+         animation.values = [translation, -translation]
+         layer.add(animation, forKey: "shake")
+     }
+ }

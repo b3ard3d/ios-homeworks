@@ -11,22 +11,6 @@ final class ProfileViewController: UIViewController {
   
     private let profileHeaderView = ProfileHeaderView()
     
-    
-  /*  private lazy var profileHeaderView: ProfileHeaderView = {
-        let view = ProfileHeaderView(frame: .zero)
-     //   view.backgroundColor = .systemGray6
-        view.backgroundColor = .systemRed
-  //      view.delegate = self
-   //     view.isUserInteractionEnabled = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-  //      self.tapGestureRecognizer.addTarget(self, action: #selector(handleTapGesture(_ :)))
-        
-    //    view.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
-
-        return view
-    }()     */
-    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.rowHeight = UITableView.automaticDimension
@@ -54,7 +38,6 @@ final class ProfileViewController: UIViewController {
         self.setupNavigationBar()
         self.setupView()
         self.addDataSource()
- 
         self.setupGesture()
     }
     
@@ -86,8 +69,6 @@ final class ProfileViewController: UIViewController {
     private func setupGesture() {
         
         tapGestureRecognizer.addTarget(self, action: #selector(handleTapGesture(_ :)))
-        
-        profileHeaderView.avatarImageView.self.addGestureRecognizer(tapGestureRecognizer)
         profileHeaderView.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
         profileHeaderView.statusLabel.addGestureRecognizer(tapGestureRecognizer)
 
@@ -100,23 +81,10 @@ final class ProfileViewController: UIViewController {
         print("111111111")
         
         profileHeaderView.avatarImageView.layer.borderColor = UIColor.black.cgColor
-        
         profileHeaderView.avatarImageView.image = UIImage(named: "logo")
    //     profileHeaderView.backgroundColor = .systemBlue
     }
 }
-    
-/* extension ProfileViewController: ProfileHeaderViewProtocol {
-    
-    func didTapShowStatusButton(textFieldIsVisible: Bool, completion: @escaping () -> Void) {
-        self.heightConstraint?.constant = textFieldIsVisible ? 300 : 245
-        UIView.animate(withDuration: 0.3, delay: 0.1) {
-            self.view.layoutIfNeeded()
-        } completion: { _ in
-            completion()
-        }
-    }
-}       */
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -143,20 +111,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.contentView.isUserInteractionEnabled = false
             return cell
         }
-        
-        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
- /*       var headerView = UIView()
-        if section == 0 {
-            headerView = ProfileHeaderView()
-        }
-        return headerView       */
-   //     profileHeaderView.backgroundColor = .systemRed
-        
-
         return profileHeaderView
     }
     

@@ -21,6 +21,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
   
     lazy var photoGalleryImages: UIImageView = {
         let photoGalleryImages = UIImageView()
+        photoGalleryImages.layer.cornerRadius = 6
         photoGalleryImages.clipsToBounds = true
         photoGalleryImages.translatesAutoresizingMaskIntoConstraints = false
         return photoGalleryImages

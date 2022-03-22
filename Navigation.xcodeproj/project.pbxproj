@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0021C7D227EA3070004BC53D /* ValidationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0021C7D127EA3070004BC53D /* ValidationData.swift */; };
+		0021C7D527EA3BF3004BC53D /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0021C7D427EA3BF3004BC53D /* ExtensionUIView.swift */; };
 		0045CF2E27C548590081FA60 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045CF2D27C548590081FA60 /* LogInViewController.swift */; };
 		0045CF3427C666E10081FA60 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045CF3327C666E10081FA60 /* PostTableViewCell.swift */; };
 		0045CF3627C67E1E0081FA60 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045CF3527C67E1E0081FA60 /* Post.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0021C7D127EA3070004BC53D /* ValidationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationData.swift; sourceTree = "<group>"; };
+		0021C7D427EA3BF3004BC53D /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		0045CF2D27C548590081FA60 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		0045CF3327C666E10081FA60 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		0045CF3527C67E1E0081FA60 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -61,6 +65,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0021C7D327EA3BBC004BC53D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0021C7D427EA3BF3004BC53D /* ExtensionUIView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		0045CF2F27C665D20081FA60 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +105,7 @@
 			children = (
 				00948A9F27D72E4C00F17B0C /* Photos.swift */,
 				0045CF3527C67E1E0081FA60 /* Post.swift */,
+				0021C7D127EA3070004BC53D /* ValidationData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -144,6 +157,7 @@
 				0045CF2F27C665D20081FA60 /* Application */,
 				00E0F0C227D7BC5600445328 /* Cells */,
 				00E0F0C127D7BA5900445328 /* Controllers */,
+				0021C7D327EA3BBC004BC53D /* Extension */,
 				0094C4A127D6A73000D8F052 /* Models */,
 				006524A427BAB5F8009BC7D5 /* Profile */,
 				0045CF3027C666370081FA60 /* Resources */,
@@ -236,7 +250,9 @@
 				0045CF3427C666E10081FA60 /* PostTableViewCell.swift in Sources */,
 				00948A9E27D72D8E00F17B0C /* PhotosViewController.swift in Sources */,
 				00F327C727ABF22E009A8CE5 /* SceneDelegate.swift in Sources */,
+				0021C7D527EA3BF3004BC53D /* ExtensionUIView.swift in Sources */,
 				006524A627BAB65F009BC7D5 /* ProfileHeaderView.swift in Sources */,
+				0021C7D227EA3070004BC53D /* ValidationData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

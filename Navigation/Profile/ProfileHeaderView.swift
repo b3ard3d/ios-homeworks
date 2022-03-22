@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol ProfileHeaderViewProtocol: AnyObject {
-    func didTapShowStatusButton(textFieldIsVisible: Bool, completion: @escaping () -> Void)
-}
-
 final class ProfileHeaderView: UIView {
     
     lazy var avatarImageView: UIImageView = {
@@ -71,9 +67,7 @@ final class ProfileHeaderView: UIView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
-    
-    weak var delegate: ProfileHeaderViewProtocol?
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.drawSelf()
@@ -91,6 +85,7 @@ final class ProfileHeaderView: UIView {
         addSubview(statusLabel)
         addSubview(setStatusButton)
         addSubview(statusTextField)
+        
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -124,19 +119,23 @@ final class ProfileHeaderView: UIView {
     }
     
     @objc private func didTapSetStatusButton() {
-       if statusTextField.alpha == 0 {
+        guard let status = statusTextField.text else {return}
+        if statusTextField.alpha == 0 {
             UIView.animate(withDuration: 0.5) {
                 self.statusTextField.alpha = 1
             } completion: { _ in
             }
         } else {
-            if self.statusTextField.text != "" {
+            if !status.isEmpty {
                 UIView.animate(withDuration: 0.5) {
                     self.statusLabel.text = self.statusTextField.text
                     self.statusTextField.text = .none
                     self.statusTextField.alpha = 0
                 } completion: { _ in
                 }
+            }
+            if status.isEmpty {
+                statusTextField.shake()
             }
             endEditing(true)
         }

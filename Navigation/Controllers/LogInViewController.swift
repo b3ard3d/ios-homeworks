@@ -84,6 +84,22 @@ final class LogInViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    private lazy var invalidLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Password error"
+        label.textAlignment = .left
+        label.textColor = .lightGray
+        label.font = .systemFont(ofSize: 12)
+        label.numberOfLines = 8
+        label.contentMode = .scaleToFill
+        label.textAlignment = .center
+        label.isHidden = true
+        return label
+    }()
+    
+    private lazy var validationData = ValidationData()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,9 +128,9 @@ final class LogInViewController: UIViewController {
         contentView.addSubview(logInButton)
         contentView.addSubview(logoImageView)
         contentView.addSubview(loginPasswordStackView)
+        contentView.addSubview(invalidLabel)
         loginPasswordStackView.addArrangedSubview(loginTextField)
-        loginPasswordStackView.addArrangedSubview(passwordTextField)
-        
+        loginPasswordStackView.addArrangedSubview(passwordTextField)        
     }
     
     private func setupConstraints() {
@@ -142,23 +158,75 @@ final class LogInViewController: UIViewController {
             logInButton.topAnchor.constraint(equalTo: loginPasswordStackView.bottomAnchor, constant: 16),
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            logInButton.heightAnchor.constraint(equalToConstant: 50)
+            logInButton.heightAnchor.constraint(equalToConstant: 50),
+            invalidLabel.topAnchor.constraint(equalTo: logInButton.bottomAnchor),
+            invalidLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            invalidLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
-        
+    }
+    
+    private func emptyTextField(textField: UITextField) {
+        textField.layer.borderColor = UIColor.red.cgColor
+        textField.layer.borderWidth = 2
+        textField.layer.cornerRadius = 10
+    }
+    
+    private func noEmptyTextField(textField: UITextField) {
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderWidth = 0.5
+        textField.layer.cornerRadius = 0
+    }
+    
+    private func validEmail(email: String) -> Bool {
+        let emailReg = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let validEmail = NSPredicate(format:"SELF MATCHES %@", emailReg)
+        return validEmail.evaluate(with: email)
+    }
+
+    private func validPassword(password : String) -> Bool {
+        let passwordReg =  ("(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[@#$%^&*]).{8,}")
+        let passwordTesting = NSPredicate(format: "SELF MATCHES %@", passwordReg)
+        return passwordTesting.evaluate(with: password) && password.count > 6
     }
     
     @objc func buttonClicked() {
         let profileViewController = ProfileViewController()
-        if self.loginTextField.text != "" && self.passwordTextField.text != "" {
-            navigationController?.pushViewController(profileViewController, animated: true)
-        }
-        if self.loginTextField.text == "" {
-       //     loginTextField.backgroundColor = .systemRed
+        guard let email = loginTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        let enteredEmail = validEmail(email: email)
+        let enteredPassword = validPassword(password: password)
+        
+        if email.isEmpty && password.isEmpty {
             loginTextField.shake()
-        }
-        if self.passwordTextField.text == "" {
-       //     loginTextField.backgroundColor = .systemRed
             passwordTextField.shake()
+        } else if email.isEmpty {
+            loginTextField.shake()
+        } else if password.isEmpty {
+            passwordTextField.shake()
+        } else {
+            if !enteredPassword && !enteredEmail {
+                invalidLabel.text = validationData.invalidEmailAndPassword
+                invalidLabel.isHidden = false
+                passwordTextField.shake()
+                loginTextField.shake()
+            } else if !enteredPassword {
+                invalidLabel.text = validationData.invalidPassword
+                invalidLabel.isHidden = false
+                passwordTextField.shake()
+            } else if !enteredEmail {
+                invalidLabel.text = validationData.invalidEmail
+                invalidLabel.isHidden = false
+                loginTextField.shake()
+            } else {
+                if (enteredEmail && enteredPassword) && (loginTextField.text != validationData.defaultLogin || passwordTextField.text != validationData.defaultPassword) {
+                    let alert = UIAlertController(title: "Неверный логин или пароль", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    present(alert, animated: true, completion: nil)
+                } else {
+                    navigationController?.pushViewController(profileViewController, animated: true)
+                    invalidLabel.isHidden = true
+                }
+            }
         }
     }
     
@@ -169,29 +237,14 @@ final class LogInViewController: UIViewController {
     
     @objc private func adjustForKeyboard(notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            
             let screenHeight = UIScreen.main.bounds.height
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            
-            let difference = keyboardHeight - ((screenHeight / 2) - 130)
-            
-            if ((screenHeight / 2) - 120) <= keyboardHeight {
+            let difference = keyboardHeight - ((screenHeight / 2) - 165)
+            if ((screenHeight / 2) - 165) <= keyboardHeight {
                 let contentOffset: CGPoint = notification.name == UIResponder.keyboardWillHideNotification ? .zero : CGPoint(x: 0, y:  difference)
                 self.scrollView.setContentOffset(contentOffset, animated: true)
             }
         }
     }
 }
-
-extension UIView {
-     func shake(count : Float = 3,for duration : TimeInterval = 0.3,withTranslation translation : Float = 3) {
-         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
-         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
-         animation.repeatCount = count
-         animation.duration = duration/TimeInterval(animation.repeatCount)
-         animation.autoreverses = true
-         animation.values = [translation, -translation]
-         layer.add(animation, forKey: "shake")
-     }
- }

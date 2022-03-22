@@ -30,6 +30,45 @@ class PhotosViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
+    
+    private lazy var photoView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.layer.borderWidth = 3
+        view.layer.borderColor = UIColor.white.cgColor
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    private lazy var alphaView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    private lazy var photoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private lazy var closeButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 20
+        button.alpha = 0
+        button.clipsToBounds = true
+        button.setBackgroundImage(UIImage(named: "closeButton"), for: .normal)
+        button.addTarget(self, action: #selector(self.didTapSetStatusButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let tapGestureRecognizer = UITapGestureRecognizer()
+    private var isExpanded = false
+    private let screenWidth = UIScreen.main.bounds.width
 
     private var collectionDataSource : [CollectionViewModel] = [
         CollectionViewModel(image: "1.jpeg"),
@@ -67,13 +106,38 @@ class PhotosViewController: UIViewController {
     }
     
     private func setupView() {
-        view.addSubview(self.collectionView)
+        view.addSubview(collectionView)
+        view.addSubview(alphaView)
+        view.addSubview(photoView)
+        photoView.addSubview(photoImageView)
+        view.bringSubviewToFront(alphaView)
+        view.addSubview(closeButton)
+        view.bringSubviewToFront(photoView)
+        self.photoView.alpha = 0
+        self.alphaView.alpha = 0
+        
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            photoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            photoView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            photoView.heightAnchor.constraint(equalToConstant: screenWidth),
+            photoView.widthAnchor.constraint(equalToConstant: screenWidth),
+            photoImageView.topAnchor.constraint(equalTo: photoView.topAnchor),
+            photoImageView.bottomAnchor.constraint(equalTo: photoView.bottomAnchor),
+            photoImageView.leadingAnchor.constraint(equalTo: photoView.leadingAnchor),
+            photoImageView.trailingAnchor.constraint(equalTo: photoView.trailingAnchor),
+            alphaView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            alphaView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            alphaView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            alphaView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            closeButton.heightAnchor.constraint(equalToConstant: 40),
+            closeButton.widthAnchor.constraint(equalToConstant: 40)
+        ].compactMap({ $0 }))
     }
     
     private func itemSize(for width: CGFloat, with spacing: CGFloat) -> CGSize {
@@ -82,6 +146,16 @@ class PhotosViewController: UIViewController {
         return CGSize(width: itemWidth, height: itemWidth)
     }
     
+    @objc private func didTapSetStatusButton() {
+        UIView.animate(withDuration: 0.5) {
+            self.photoView.alpha = 0
+            self.alphaView.alpha = 0
+            self.closeButton.alpha = 0
+        } completion: { _ in
+            self.closeButton.isHidden = false
+            self.isExpanded = false
+        }
+    }
 }
 
 extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -110,4 +184,25 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         let spacing = ( collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing
         return self.itemSize(for: collectionView.frame.width, with: spacing ?? 0)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.isExpanded.toggle()
+        self.photoImageView.image = UIImage(named: String(indexPath.row + 1) + ".jpeg")
+        UIView.animate(withDuration: 0.5) {
+            self.photoView.alpha = 1
+            self.alphaView.alpha = 0.7
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+        }
+        if self.isExpanded {
+            self.alphaView.isHidden = false
+            self.closeButton.isHidden = false
+        }
+        UIView.animate(withDuration: 0.3, delay: 0.5) {
+            self.closeButton.alpha = 1
+        } completion: { _ in
+            self.closeButton.isHidden = false
+        }
+    }
 }
+

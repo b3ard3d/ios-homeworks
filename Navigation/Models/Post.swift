@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Posts {
+struct Posts: Equatable {
     let author, description, image: String
     var likes, views: Int
 }

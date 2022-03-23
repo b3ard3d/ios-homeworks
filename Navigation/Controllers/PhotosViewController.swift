@@ -37,7 +37,7 @@ class PhotosViewController: UIViewController {
         view.clipsToBounds = true
         view.layer.borderWidth = 3
         view.layer.borderColor = UIColor.white.cgColor
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         return view
     }()
     
@@ -50,7 +50,8 @@ class PhotosViewController: UIViewController {
     
     private lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
+       // imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -186,7 +187,13 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.isExpanded.toggle()
+        
+        
+        
+        let viewController = DetailedPhotoViewController()
+        viewController.selectedImage = collectionDataSource[indexPath.row].image
+        present(viewController, animated: true)
+   /*     self.isExpanded.toggle()
         self.photoImageView.image = UIImage(named: String(indexPath.row + 1) + ".jpeg")
         UIView.animate(withDuration: 0.5) {
             self.photoView.alpha = 1
@@ -202,7 +209,7 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
             self.closeButton.alpha = 1
         } completion: { _ in
             self.closeButton.isHidden = false
-        }
+        }   */
     }
 }
 

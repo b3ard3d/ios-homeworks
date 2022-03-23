@@ -32,16 +32,6 @@ final class GesturesAndAnimationsViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var testLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.text = "Текст для проверки размытости фона"
-        label.font = .systemFont(ofSize: 18, weight: .regular)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 20
@@ -72,7 +62,6 @@ final class GesturesAndAnimationsViewController: UIViewController {
     }
     
     private func setupView() {
-        view.addSubview(testLabel)
         view.addSubview(alphaView)
         view.addSubview(self.avatarView)
         avatarView.addSubview(self.avatarImageView)
@@ -94,9 +83,6 @@ final class GesturesAndAnimationsViewController: UIViewController {
             avatarImageView.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor),
             avatarImageView.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor),
             avatarImageView.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor),
-            testLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            testLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
-            testLabel.widthAnchor.constraint(equalToConstant: 200),
             alphaView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             alphaView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             alphaView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),

@@ -18,6 +18,8 @@
 		00948A9E27D72D8E00F17B0C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00948A9D27D72D8E00F17B0C /* PhotosViewController.swift */; };
 		00948AA027D72E4C00F17B0C /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00948A9F27D72E4C00F17B0C /* Photos.swift */; };
 		00948AA227D7561900F17B0C /* GesturesAndAnimationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00948AA127D7561900F17B0C /* GesturesAndAnimationsViewController.swift */; };
+		00C78CC327EB63FD00211DFC /* DetailedPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C78CC227EB63FD00211DFC /* DetailedPhotosViewController.swift */; };
+		00C78CC527EB7B9100211DFC /* DetailedPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C78CC427EB7B9100211DFC /* DetailedPostViewController.swift */; };
 		00D7B37A27B91FD900C7E906 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D7B37927B91FD900C7E906 /* MainTabBarController.swift */; };
 		00D7B37C27B9208500C7E906 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D7B37B27B9208500C7E906 /* FeedViewController.swift */; };
 		00D7B37E27B920F200C7E906 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D7B37D27B920F200C7E906 /* InfoViewController.swift */; };
@@ -41,6 +43,8 @@
 		00948A9D27D72D8E00F17B0C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		00948A9F27D72E4C00F17B0C /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		00948AA127D7561900F17B0C /* GesturesAndAnimationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesAndAnimationsViewController.swift; sourceTree = "<group>"; };
+		00C78CC227EB63FD00211DFC /* DetailedPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPhotosViewController.swift; sourceTree = "<group>"; };
+		00C78CC427EB7B9100211DFC /* DetailedPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPostViewController.swift; sourceTree = "<group>"; };
 		00D7B37927B91FD900C7E906 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		00D7B37B27B9208500C7E906 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		00D7B37D27B920F200C7E906 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -110,9 +114,19 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		00C78CC627EB7BA600211DFC /* Detailed */ = {
+			isa = PBXGroup;
+			children = (
+				00C78CC227EB63FD00211DFC /* DetailedPhotosViewController.swift */,
+				00C78CC427EB7B9100211DFC /* DetailedPostViewController.swift */,
+			);
+			path = Detailed;
+			sourceTree = "<group>";
+		};
 		00E0F0C127D7BA5900445328 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				00C78CC627EB7BA600211DFC /* Detailed */,
 				00D7B37B27B9208500C7E906 /* FeedViewController.swift */,
 				00948AA127D7561900F17B0C /* GesturesAndAnimationsViewController.swift */,
 				00D7B37D27B920F200C7E906 /* InfoViewController.swift */,
@@ -239,9 +253,11 @@
 				00F327C527ABF22E009A8CE5 /* AppDelegate.swift in Sources */,
 				0045CF3627C67E1E0081FA60 /* Post.swift in Sources */,
 				00948AA027D72E4C00F17B0C /* Photos.swift in Sources */,
+				00C78CC327EB63FD00211DFC /* DetailedPhotosViewController.swift in Sources */,
 				00D7B38027B9213600C7E906 /* PostViewController.swift in Sources */,
 				00948A9C27D72CD900F17B0C /* PhotosCollectionViewCell.swift in Sources */,
 				0045CF2E27C548590081FA60 /* LogInViewController.swift in Sources */,
+				00C78CC527EB7B9100211DFC /* DetailedPostViewController.swift in Sources */,
 				00D7B37C27B9208500C7E906 /* FeedViewController.swift in Sources */,
 				00D7B37A27B91FD900C7E906 /* MainTabBarController.swift in Sources */,
 				00D7B37E27B920F200C7E906 /* InfoViewController.swift in Sources */,

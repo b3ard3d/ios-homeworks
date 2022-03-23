@@ -9,6 +9,10 @@ import UIKit
 
 final class LogInViewController: UIViewController {
     
+    private enum Constants {
+        static let loginButtonHeight: CGFloat = 50
+    }
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white
@@ -158,23 +162,11 @@ final class LogInViewController: UIViewController {
             logInButton.topAnchor.constraint(equalTo: loginPasswordStackView.bottomAnchor, constant: 16),
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            logInButton.heightAnchor.constraint(equalToConstant: 50),
+            logInButton.heightAnchor.constraint(equalToConstant: Constants.loginButtonHeight),
             invalidLabel.topAnchor.constraint(equalTo: logInButton.bottomAnchor),
             invalidLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             invalidLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
-    }
-    
-    private func emptyTextField(textField: UITextField) {
-        textField.layer.borderColor = UIColor.red.cgColor
-        textField.layer.borderWidth = 2
-        textField.layer.cornerRadius = 10
-    }
-    
-    private func noEmptyTextField(textField: UITextField) {
-        textField.layer.borderColor = UIColor.lightGray.cgColor
-        textField.layer.borderWidth = 0.5
-        textField.layer.cornerRadius = 0
     }
     
     private func validEmail(email: String) -> Bool {
@@ -240,6 +232,11 @@ final class LogInViewController: UIViewController {
             let screenHeight = UIScreen.main.bounds.height
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
+            
+            
+
+           // self.scrollView.contentOffset = CGPoint(x: 0, y: yOffset)
+            
             let difference = keyboardHeight - ((screenHeight / 2) - 165)
             if ((screenHeight / 2) - 165) <= keyboardHeight {
                 let contentOffset: CGPoint = notification.name == UIResponder.keyboardWillHideNotification ? .zero : CGPoint(x: 0, y:  difference)

@@ -60,7 +60,6 @@ class PostTableViewCell: UITableViewCell {
         imageView.backgroundColor = .black
         imageView.contentMode = .scaleAspectFit
         imageView.setContentCompressionResistancePriority(UILayoutPriority(100), for: .vertical)
-        
         imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -75,11 +74,16 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
 
-    private lazy var likesLabel: UILabel = {
+      lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.font = UIFont(name: "System", size: 16)
         label.textColor = .black
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapLikeLabel))
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(tap)
+
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -147,8 +151,15 @@ class PostTableViewCell: UITableViewCell {
     func setup(with viewModel: ViewModel) {        
         self.authorLabel.text = viewModel.author
         self.imageImageView.image = UIImage(named: viewModel.image)
+   //     self.imageImageView.addGestureRecognizer(tapGestureRecognizer)
         self.descriptionLabel.text = viewModel.description
         self.likesLabel.text = "Likes: " + String(viewModel.likes)
         self.viewsLabel.text = "Views: " + String(viewModel.views)
+        
+    }
+    
+    @objc func tapLikeLabel() {
+        print("2222")
+        
     }
 }

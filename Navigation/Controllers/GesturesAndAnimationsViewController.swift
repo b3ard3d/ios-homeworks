@@ -136,14 +136,13 @@ final class GesturesAndAnimationsViewController: UIViewController {
             self.avatarView.layer.cornerRadius = 75
             self.alphaView.alpha = 0
             self.view.layoutIfNeeded()
-        } completion: { _ in
-        }
-        
-        UIView.animate(withDuration: 0.3, delay: 0.5) {
+            
             self.closeButton.alpha = 0
+
         } completion: { _ in
             self.closeButton.isHidden = false
             self.isExpanded = false
+            
         }
     }
 }

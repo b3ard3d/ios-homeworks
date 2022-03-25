@@ -9,6 +9,8 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
+    var likedDelegate: TapLikedDelegate?
+
     struct ViewModel {
         let author: String
         let image: String
@@ -16,7 +18,7 @@ class PostTableViewCell: UITableViewCell {
         var likes: Int
         var views: Int
     }
-    
+        
     private lazy var backView: UIView = {
         let view = UIView()
         view.clipsToBounds = true
@@ -74,13 +76,13 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
 
-      lazy var likesLabel: UILabel = {
+    lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.font = UIFont(name: "System", size: 16)
         label.textColor = .black
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapLikeLabel))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapLiked))
         label.isUserInteractionEnabled = true
         label.addGestureRecognizer(tap)
 
@@ -151,15 +153,13 @@ class PostTableViewCell: UITableViewCell {
     func setup(with viewModel: ViewModel) {        
         self.authorLabel.text = viewModel.author
         self.imageImageView.image = UIImage(named: viewModel.image)
-   //     self.imageImageView.addGestureRecognizer(tapGestureRecognizer)
         self.descriptionLabel.text = viewModel.description
         self.likesLabel.text = "Likes: " + String(viewModel.likes)
         self.viewsLabel.text = "Views: " + String(viewModel.views)
         
     }
     
-    @objc func tapLikeLabel() {
-        print("2222")
-        
+    @objc func tapLiked() {
+        likedDelegate?.tapLikedLabel()
     }
 }

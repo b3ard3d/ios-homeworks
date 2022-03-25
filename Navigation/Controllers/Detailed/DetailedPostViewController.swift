@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailedPostViewController: UIViewController {
-    
+        
     var selectedDataAuthor, selectedDataDescription, selectedDataImage: String?
     var selectedDataLikes, selectedDataViews: Int?
     
@@ -75,6 +75,7 @@ class DetailedPostViewController: UIViewController {
         }
         label.font = UIFont(name: "System", size: 16)
         label.textColor = .black
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

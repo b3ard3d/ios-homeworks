@@ -187,29 +187,9 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
-        
         let viewController = DetailedPhotoViewController()
         viewController.selectedImage = collectionDataSource[indexPath.row].image
         present(viewController, animated: true)
-   /*     self.isExpanded.toggle()
-        self.photoImageView.image = UIImage(named: String(indexPath.row + 1) + ".jpeg")
-        UIView.animate(withDuration: 0.5) {
-            self.photoView.alpha = 1
-            self.alphaView.alpha = 0.7
-            self.view.layoutIfNeeded()
-        } completion: { _ in
-        }
-        if self.isExpanded {
-            self.alphaView.isHidden = false
-            self.closeButton.isHidden = false
-        }
-        UIView.animate(withDuration: 0.3, delay: 0.5) {
-            self.closeButton.alpha = 1
-        } completion: { _ in
-            self.closeButton.isHidden = false
-        }   */
     }
 }
 

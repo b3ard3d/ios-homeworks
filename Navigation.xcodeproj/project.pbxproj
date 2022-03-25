@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0021C7D227EA3070004BC53D /* ValidationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0021C7D127EA3070004BC53D /* ValidationData.swift */; };
 		0021C7D527EA3BF3004BC53D /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0021C7D427EA3BF3004BC53D /* ExtensionUIView.swift */; };
+		0040B7DF27ECC93A00F25458 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040B7DE27ECC93A00F25458 /* Protocols.swift */; };
+		0040B7E127ECE27500F25458 /* DetailedAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040B7E027ECE27500F25458 /* DetailedAvatarView.swift */; };
+		0040B7E327ECF0CA00F25458 /* DetailedAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040B7E227ECF0CA00F25458 /* DetailedAvatarViewController.swift */; };
 		0045CF2E27C548590081FA60 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045CF2D27C548590081FA60 /* LogInViewController.swift */; };
 		0045CF3427C666E10081FA60 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045CF3327C666E10081FA60 /* PostTableViewCell.swift */; };
 		0045CF3627C67E1E0081FA60 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045CF3527C67E1E0081FA60 /* Post.swift */; };
@@ -34,6 +37,9 @@
 /* Begin PBXFileReference section */
 		0021C7D127EA3070004BC53D /* ValidationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationData.swift; sourceTree = "<group>"; };
 		0021C7D427EA3BF3004BC53D /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
+		0040B7DE27ECC93A00F25458 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		0040B7E027ECE27500F25458 /* DetailedAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedAvatarView.swift; sourceTree = "<group>"; };
+		0040B7E227ECF0CA00F25458 /* DetailedAvatarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedAvatarViewController.swift; sourceTree = "<group>"; };
 		0045CF2D27C548590081FA60 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		0045CF3327C666E10081FA60 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		0045CF3527C67E1E0081FA60 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -77,6 +83,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		0040B7DD27ECC8D400F25458 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				0040B7DE27ECC93A00F25458 /* Protocols.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		0045CF2F27C665D20081FA60 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +131,8 @@
 		00C78CC627EB7BA600211DFC /* Detailed */ = {
 			isa = PBXGroup;
 			children = (
+				0040B7E027ECE27500F25458 /* DetailedAvatarView.swift */,
+				0040B7E227ECF0CA00F25458 /* DetailedAvatarViewController.swift */,
 				00C78CC227EB63FD00211DFC /* DetailedPhotosViewController.swift */,
 				00C78CC427EB7B9100211DFC /* DetailedPostViewController.swift */,
 			);
@@ -174,6 +190,7 @@
 				0021C7D327EA3BBC004BC53D /* Extension */,
 				0094C4A127D6A73000D8F052 /* Models */,
 				006524A427BAB5F8009BC7D5 /* Profile */,
+				0040B7DD27ECC8D400F25458 /* Protocol */,
 				0045CF3027C666370081FA60 /* Resources */,
 			);
 			path = Navigation;
@@ -254,10 +271,13 @@
 				0045CF3627C67E1E0081FA60 /* Post.swift in Sources */,
 				00948AA027D72E4C00F17B0C /* Photos.swift in Sources */,
 				00C78CC327EB63FD00211DFC /* DetailedPhotosViewController.swift in Sources */,
+				0040B7E127ECE27500F25458 /* DetailedAvatarView.swift in Sources */,
 				00D7B38027B9213600C7E906 /* PostViewController.swift in Sources */,
 				00948A9C27D72CD900F17B0C /* PhotosCollectionViewCell.swift in Sources */,
+				0040B7E327ECF0CA00F25458 /* DetailedAvatarViewController.swift in Sources */,
 				0045CF2E27C548590081FA60 /* LogInViewController.swift in Sources */,
 				00C78CC527EB7B9100211DFC /* DetailedPostViewController.swift in Sources */,
+				0040B7DF27ECC93A00F25458 /* Protocols.swift in Sources */,
 				00D7B37C27B9208500C7E906 /* FeedViewController.swift in Sources */,
 				00D7B37A27B91FD900C7E906 /* MainTabBarController.swift in Sources */,
 				00D7B37E27B920F200C7E906 /* InfoViewController.swift in Sources */,

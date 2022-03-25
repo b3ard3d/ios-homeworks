@@ -15,9 +15,7 @@ final class ProfileHeaderView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
-        
         imageView.isUserInteractionEnabled = true
-        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -30,12 +28,11 @@ final class ProfileHeaderView: UIView {
         return label
     }()
     
-     lazy var statusLabel: UILabel = {
+    private lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.text = "Статус"
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .gray
-        label.isUserInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

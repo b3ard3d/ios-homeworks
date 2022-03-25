@@ -7,9 +7,19 @@
 
 import UIKit
 
-final class ProfileViewController: UIViewController {
-  
+final class ProfileViewController: UIViewController, TapLikedDelegate {
+      
     private let profileHeaderView = ProfileHeaderView()
+    
+    private let detailedAvatarView: DetailedAvatarView = {
+        let avatarView = DetailedAvatarView()
+        avatarView.translatesAutoresizingMaskIntoConstraints = false
+        return avatarView
+    }()
+    
+    var liked: Bool = false
+    
+ //   var isTapLiked: Bool = false
         
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -39,6 +49,12 @@ final class ProfileViewController: UIViewController {
         self.setupGesture()
     }
     
+    func tapLikedLabel() {
+        liked = true
+    //    liked = true
+        self.tableView.reloadData()
+    }
+    
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.title = "Профиль"
@@ -47,12 +63,18 @@ final class ProfileViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .systemGray6
         view.addSubview(tableView)
+        view.addSubview(detailedAvatarView)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            detailedAvatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            detailedAvatarView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            detailedAvatarView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            detailedAvatarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
@@ -64,22 +86,18 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setupGesture() {
-        
         tapGestureRecognizer.addTarget(self, action: #selector(handleTapGesture(_ :)))
         profileHeaderView.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
-        profileHeaderView.statusLabel.addGestureRecognizer(tapGestureRecognizer)
-        
     }
-    
     
     @objc func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer){
         guard self.tapGestureRecognizer === gestureRecognizer else { return }
-       
-        print("111111111")
         
-        profileHeaderView.avatarImageView.layer.borderColor = UIColor.black.cgColor
-        profileHeaderView.avatarImageView.image = UIImage(named: "logo")
-   //     profileHeaderView.backgroundColor = .systemBlue
+        let viewController = DetailedAvatarViewController()
+        present(viewController, animated: true)
+   /*     UIView.animate(withDuration: 0.5) {
+            self.detailedAvatarView.alpha = 0.95
+        }   */
     }
 }
 
@@ -97,17 +115,27 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as? PostTableViewCell else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
-                return cell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+                    return cell
+                }
+        //    print(indexPath.row)
+            cell.likedDelegate = self
+            
+            if liked {
+                dataSource[indexPath.row - 1].likes += 1
+                liked = false
+                print(indexPath.row)
             }
-        let article = self.dataSource[indexPath.row - 1]
-        let viewModel = PostTableViewCell.ViewModel(author: article.author,
-                                                    image: article.image,
-                                                    description: article.description,
-                                                    likes: article.likes,
-                                                    views: article.views)
-        cell.setup(with: viewModel)
-        return cell
+            
+            let article = self.dataSource[indexPath.row - 1]
+            let viewModel = PostTableViewCell.ViewModel(author: article.author,
+                                                        image: article.image,
+                                                        description: article.description,
+                                                        likes: article.likes,
+                                                        views: article.views)
+            cell.setup(with: viewModel)
+            
+            return cell
         }
     }
     
@@ -132,73 +160,19 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             dataSource[indexPath.row - 1].views += 1
             self.tableView.reloadRows(at: [indexPath], with: .none)
             present(viewController, animated: true)
-
-            
-      //      present(viewController, animated: true)
-      /*      guard let heightCellConstraint = tableView.cellForRow(at: indexPath)?.heightAnchor
-            else {return}
-            NSLayoutConstraint.activate([
-                postView.heightAnchor.constraint(equalTo: heightCellConstraint)
-            ])
-            
-            
-            
-
-            
-            self.authorLabel.text = dataSource[indexPath.row - 1].author
-            self.imageImageView.image = UIImage(named: dataSource[indexPath.row - 1].image)
-            self.descriptionLabel.text = dataSource[indexPath.row - 1].description
-            self.likesLabel.text = "Likes: " + String(dataSource[indexPath.row - 1].likes)
-            self.viewsLabel.text = "Views: " + String(dataSource[indexPath.row - 1].views + 1)
-            
-            dataSource[indexPath.row - 1].views += 1
-            
-            self.tableView.reloadRows(at: [indexPath], with: .automatic)
-            
-            UIView.animate(withDuration: 0.5) {
-                self.postView.alpha = 1
-                self.alphaView.alpha = 0.7
-                self.closeButton.alpha = 1
-            } completion: { _ in
-            }       */
         }
     }
     
-/*    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let place = dataSource[indexPath.row]
-        
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, complete in
-            
-            StorageManager.deleteObject(place)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            complete(true)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if indexPath.row != 0 {
+            let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") {
+                (contextualAction, view, boolValue) in
+                self.dataSource.remove(at: indexPath.row - 1)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
+            return swipeActions
         }
-        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-               configuration.performsFirstActionWithFullSwipe = true
-        tableView.reloadData()
-        return configuration
-        
-        
-    }       */
-    
-/*    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let place = dataSource[indexPath.row]
-        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") {
-            (contextualAction, view, boolValue) in
-                
-            self.dataSource.removeAll(where:{ $0 == place })
-           //     self.dataSource.remove(at: indexPath.row)
-         //       StorageManager.deleteObject(place)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
-      //  tableView.reloadData()
-        
-        return swipeActions
-        
-    }           */
-    
-    
+        else { return nil }
+    }
 }

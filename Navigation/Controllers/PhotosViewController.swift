@@ -31,45 +31,9 @@ class PhotosViewController: UIViewController {
         return collectionView
     }()
     
-    private lazy var photoView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.clipsToBounds = true
-        view.layer.borderWidth = 3
-        view.layer.borderColor = UIColor.white.cgColor
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    private lazy var alphaView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-        return view
-    }()
-    
-    private lazy var photoImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-       // imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    private lazy var closeButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 20
-        button.alpha = 0
-        button.clipsToBounds = true
-        button.setBackgroundImage(UIImage(named: "closeButton"), for: .normal)
-        button.addTarget(self, action: #selector(self.didTapSetStatusButton), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     private let tapGestureRecognizer = UITapGestureRecognizer()
-    private var isExpanded = false
-    private let screenWidth = UIScreen.main.bounds.width
+//    private var isExpanded = false
+//    private let screenWidth = UIScreen.main.bounds.width
 
     private var collectionDataSource : [CollectionViewModel] = [
         CollectionViewModel(image: "1.jpeg"),
@@ -98,7 +62,9 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
-        self.title = "Photo Gallery"
+        self.title = "Фотографии"
+        navigationItem.backButtonTitle = ""
+    //    self.title = "Photo Gallery"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,21 +74,14 @@ class PhotosViewController: UIViewController {
     
     private func setupView() {
         view.addSubview(collectionView)
-        view.addSubview(alphaView)
-        view.addSubview(photoView)
-        photoView.addSubview(photoImageView)
-        view.bringSubviewToFront(alphaView)
-        view.addSubview(closeButton)
-        view.bringSubviewToFront(photoView)
-        self.photoView.alpha = 0
-        self.alphaView.alpha = 0
+        
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            photoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+    /*        photoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             photoView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             photoView.heightAnchor.constraint(equalToConstant: screenWidth),
             photoView.widthAnchor.constraint(equalToConstant: screenWidth),
@@ -137,7 +96,7 @@ class PhotosViewController: UIViewController {
             closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             closeButton.heightAnchor.constraint(equalToConstant: 40),
-            closeButton.widthAnchor.constraint(equalToConstant: 40)
+            closeButton.widthAnchor.constraint(equalToConstant: 40)     */
         ].compactMap({ $0 }))
     }
     
@@ -145,17 +104,6 @@ class PhotosViewController: UIViewController {
         let neededWidth = width - 4 * spacing
         let itemWidth = floor(neededWidth / Constants.itemCount)
         return CGSize(width: itemWidth, height: itemWidth)
-    }
-    
-    @objc private func didTapSetStatusButton() {
-        UIView.animate(withDuration: 0.5) {
-            self.photoView.alpha = 0
-            self.alphaView.alpha = 0
-            self.closeButton.alpha = 0
-        } completion: { _ in
-            self.closeButton.isHidden = false
-            self.isExpanded = false
-        }
     }
 }
 
@@ -189,6 +137,7 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let viewController = DetailedPhotoViewController()
         viewController.selectedImage = collectionDataSource[indexPath.row].image
+    //    navigationController?.pushViewController(viewController, animated: true)
         present(viewController, animated: true)
     }
 }

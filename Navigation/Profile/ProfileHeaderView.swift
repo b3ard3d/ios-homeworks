@@ -40,6 +40,7 @@ final class ProfileHeaderView: UIView {
     private lazy var setStatusButton: UIButton = {
         let button = UIButton()
         button.setTitle("Show status", for: .normal)
+    //    button.backgroundColor = .systemGray3
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true

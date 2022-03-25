@@ -33,6 +33,7 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
         tableView.backgroundColor = .systemGray6
         tableView.layer.borderColor = UIColor.lightGray.cgColor
         tableView.layer.borderWidth = 0.5
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -58,6 +59,7 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.title = "Профиль"
+        navigationItem.backButtonTitle = ""
     }
     
     private func setupView() {
@@ -95,6 +97,7 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
         
         let viewController = DetailedAvatarViewController()
         present(viewController, animated: true)
+        
    /*     UIView.animate(withDuration: 0.5) {
             self.detailedAvatarView.alpha = 0.95
         }   */
@@ -159,7 +162,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             viewController.selectedDataDescription = dataSource[indexPath.row - 1].description
             dataSource[indexPath.row - 1].views += 1
             self.tableView.reloadRows(at: [indexPath], with: .none)
-            present(viewController, animated: true)
+      //      present(viewController, animated: true)
+            navigationController?.pushViewController(viewController, animated: true)
         }
     }
     

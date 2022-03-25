@@ -12,12 +12,26 @@ class DetailedPostViewController: UIViewController {
     var selectedDataAuthor, selectedDataDescription, selectedDataImage: String?
     var selectedDataLikes, selectedDataViews: Int?
     
-    private lazy var alphaView: UIView = {
-        let view = UIView()
-        view.alpha = 0.7
-        view.backgroundColor = .white
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .white
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private lazy var contentView: UIView = {
+        let contentView = UIView()
+        contentView.backgroundColor = .white
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
+    
+    private lazy var stackViewPost: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     private lazy var stackViewLikesViews: UIStackView = {
@@ -91,59 +105,45 @@ class DetailedPostViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    private lazy var closeButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 20
-        button.clipsToBounds = true
-        button.setBackgroundImage(UIImage(named: "closeButton"), for: .normal)
-        button.addTarget(self, action: #selector(self.didTapSetButton), for: .touchUpInside)
-        button.isUserInteractionEnabled = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         setupView()
     }
     
-    private func setupView() {
-        view.addSubview(alphaView)
-        view.addSubview(closeButton)
-        view.addSubview(authorLabel)
-        view.addSubview(imageImageView)
-        view.addSubview(descriptionLabel)
-        view.addSubview(stackViewLikesViews)
-        stackViewLikesViews.addArrangedSubview(likesLabel)
-        stackViewLikesViews.addArrangedSubview(viewsLabel)
-        view.backgroundColor = .clear
-        
-        NSLayoutConstraint.activate([
-            imageImageView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
-            imageImageView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            imageImageView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            authorLabel.bottomAnchor.constraint(equalTo: imageImageView.topAnchor),
-            authorLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            authorLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: imageImageView.bottomAnchor),
-            descriptionLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            stackViewLikesViews.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
-            stackViewLikesViews.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            stackViewLikesViews.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            alphaView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            alphaView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            alphaView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            alphaView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            closeButton.heightAnchor.constraint(equalToConstant: 40),
-            closeButton.widthAnchor.constraint(equalToConstant: 40)
-        ])
+    private func setupNavigationBar() {
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationItem.title = "Запись"
     }
     
-    @objc private func didTapSetButton() {
-        self.dismiss(animated: true, completion: nil)
+    private func setupView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(stackViewPost)
+        stackViewPost.addArrangedSubview(authorLabel)
+        stackViewPost.addArrangedSubview(imageImageView)
+        stackViewPost.addArrangedSubview(descriptionLabel)
+        stackViewPost.addArrangedSubview(stackViewLikesViews)
+        stackViewLikesViews.addArrangedSubview(likesLabel)
+        stackViewLikesViews.addArrangedSubview(viewsLabel)
+        view.backgroundColor = .white
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+       
+            stackViewPost.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackViewPost.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            stackViewPost.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackViewPost.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
 }

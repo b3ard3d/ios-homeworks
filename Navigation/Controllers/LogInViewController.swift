@@ -110,6 +110,9 @@ final class LogInViewController: UIViewController {
         view.backgroundColor = .white
         self.configureSubviews()
         self.setupConstraints()
+        
+        navigationItem.backButtonTitle = ""
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapKeyboardOff(_:)))
         view.addGestureRecognizer(tap)
         

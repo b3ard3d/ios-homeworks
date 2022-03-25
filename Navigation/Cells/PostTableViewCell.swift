@@ -10,7 +10,7 @@ import UIKit
 class PostTableViewCell: UITableViewCell {
     
     var likedDelegate: TapLikedDelegate?
-
+    
     struct ViewModel {
         let author: String
         let image: String
@@ -49,7 +49,8 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.backgroundColor = .clear
         label.numberOfLines = 2
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+     //   label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .black
         label.textAlignment = NSTextAlignment.left
         label.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
@@ -57,9 +58,11 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-     lazy var imageImageView: UIImageView = {
+    lazy var imageImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .black
+        
+
         imageView.contentMode = .scaleAspectFit
         imageView.setContentCompressionResistancePriority(UILayoutPriority(100), for: .vertical)
         imageView.isUserInteractionEnabled = true

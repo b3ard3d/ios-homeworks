@@ -38,7 +38,7 @@ final class GesturesAndAnimationsViewController: UIViewController {
         button.alpha = 0
         button.clipsToBounds = true
         button.setBackgroundImage(UIImage(named: "closeButton"), for: .normal)
-        button.addTarget(self, action: #selector(self.didTapSetStatusButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.didTapCloseButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -126,7 +126,7 @@ final class GesturesAndAnimationsViewController: UIViewController {
         }
     }
     
-    @objc private func didTapSetStatusButton() {
+    @objc private func didTapCloseButton() {
         self.avatarViewCenterXConstraint?.constant = -1 * (screenWidth * 0.5 - 91)
         self.avatarViewCenterYConstraint?.constant = -1 * (screenHeight * 0.5 - 166)
         self.avatarViewHeightConstraint?.constant = 150

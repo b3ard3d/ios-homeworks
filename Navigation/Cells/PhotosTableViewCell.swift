@@ -12,7 +12,7 @@ class PhotosTableViewCell: UITableViewCell {
     private enum Constants {
         static let itemCount: CGFloat = 4
     }
-
+    
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -43,9 +43,11 @@ class PhotosTableViewCell: UITableViewCell {
         
     private lazy var collectionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 24.0, weight: .bold)
+     //   label.font = UIFont.systemFont(ofSize: 24.0, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 14.0, weight: .bold)
         label.textColor = .black
-        label.text = "Photos"
+   //     label.text = "Photos"
+        label.text = "ФОТОГРАФИИ"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -122,5 +124,5 @@ extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let spacing = (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing
         return self.itemSize(for: collectionView.frame.width, with: spacing ?? 0)
-    }       
+    }
 }

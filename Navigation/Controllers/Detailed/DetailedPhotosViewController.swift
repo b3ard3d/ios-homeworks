@@ -13,7 +13,7 @@ class DetailedPhotoViewController: UIViewController {
     
     private lazy var alphaView: UIView = {
         let view = UIView()
-        view.alpha = 0.7
+        view.alpha = 0.9
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -34,7 +34,7 @@ class DetailedPhotoViewController: UIViewController {
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
         button.setBackgroundImage(UIImage(named: "closeButton"), for: .normal)
-        button.addTarget(self, action: #selector(self.didTapSetButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.didTapCloseButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -66,7 +66,7 @@ class DetailedPhotoViewController: UIViewController {
         ])
     }
     
-    @objc private func didTapSetButton() {
+    @objc private func didTapCloseButton() {
         self.dismiss(animated: true, completion: nil)
     }
 }

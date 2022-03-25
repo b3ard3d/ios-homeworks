@@ -32,7 +32,7 @@ class DetailedAvatarView: UIView {
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
         button.setBackgroundImage(UIImage(named: "closeButton"), for: .normal)
-        button.addTarget(self, action: #selector(self.didTapSetStatusButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.didTapCloseButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -68,8 +68,7 @@ class DetailedAvatarView: UIView {
         ])
     }
     
-    @objc private func didTapSetStatusButton() {
-
+    @objc private func didTapCloseButton() {
         UIView.animate(withDuration: 0.5) {
             self.alpha = 0
         }

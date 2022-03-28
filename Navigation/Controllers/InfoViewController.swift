@@ -8,24 +8,36 @@
 import UIKit
 
 class InfoViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationController?.navigationBar.prefersLargeTitles = false
-        view.backgroundColor = .white
-        title = "Инфо"
-        let button = UIButton(frame: CGRect(x: 130, y: 770, width: 150, height: 40))
-        view.addSubview(button)
+    
+    private lazy var buttonAlert: UIButton = {
+        let button = UIButton()
         button.setTitle("Показать алерт", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(alertClicked), for: .touchUpInside)
+        return button
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNavigationBar()
+        setupView()
+    }
+    
+    private func setupNavigationBar() {
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+        view.backgroundColor = .white
+        title = "Инфо"
+    }
+    
+    private func setupView() {
+        view.addSubview(buttonAlert)
         NSLayoutConstraint.activate([
-            button.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50),
-            button.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50),
-            button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            button.heightAnchor.constraint(equalToConstant: 40)
+            buttonAlert.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50),
+            buttonAlert.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50),
+            buttonAlert.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            buttonAlert.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
@@ -38,5 +50,4 @@ class InfoViewController: UIViewController {
         present(alert, animated: true, completion: nil)
         print("Alert work")
     }
-
 }

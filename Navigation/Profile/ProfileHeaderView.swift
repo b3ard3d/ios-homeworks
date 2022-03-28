@@ -33,14 +33,14 @@ final class ProfileHeaderView: UIView {
         label.text = "Статус"
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .gray
+        label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var setStatusButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Show status", for: .normal)
-    //    button.backgroundColor = .systemGray3
+        button.setTitle("Изменить статус", for: .normal)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -51,7 +51,7 @@ final class ProfileHeaderView: UIView {
     
     private lazy var statusTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Waiting with something..."
+        textField.placeholder = "Введите что-то..."
         textField.returnKeyType = .done
         textField.autocapitalizationType = .words
         textField.font = .systemFont(ofSize: 15)
@@ -61,7 +61,7 @@ final class ProfileHeaderView: UIView {
         textField.returnKeyType = .next
         textField.keyboardType = .default
         textField.clearButtonMode = .always
-        textField.alpha = 0
+   //     textField.alpha = 0
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -108,27 +108,27 @@ final class ProfileHeaderView: UIView {
     
     @objc func tapKeyboardOff(_ sender: Any) {
         statusTextField.resignFirstResponder()
-        if self.statusTextField.text == "" {
+  /*      if self.statusTextField.text == "" {
             UIView.animate(withDuration: 0.5) {
                 self.statusTextField.alpha = 0
             } completion: { _ in
             }
-        }
+        }       */
     }
     
     @objc private func didTapSetStatusButton() {
         guard let status = statusTextField.text else {return}
-        if statusTextField.alpha == 0 {
+    /*    if statusTextField.alpha == 0 {
             UIView.animate(withDuration: 0.5) {
                 self.statusTextField.alpha = 1
             } completion: { _ in
             }
-        } else {
+        } else {    */
             if !status.isEmpty {
                 UIView.animate(withDuration: 0.5) {
                     self.statusLabel.text = self.statusTextField.text
                     self.statusTextField.text = .none
-                    self.statusTextField.alpha = 0
+             //       self.statusTextField.alpha = 0
                 } completion: { _ in
                 }
             }
@@ -136,6 +136,6 @@ final class ProfileHeaderView: UIView {
                 statusTextField.shake()
             }
             endEditing(true)
-        }
+   //     }
     }
 }

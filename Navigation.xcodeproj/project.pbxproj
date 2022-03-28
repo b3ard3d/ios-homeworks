@@ -21,6 +21,7 @@
 		00948A9E27D72D8E00F17B0C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00948A9D27D72D8E00F17B0C /* PhotosViewController.swift */; };
 		00948AA027D72E4C00F17B0C /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00948A9F27D72E4C00F17B0C /* Photos.swift */; };
 		00948AA227D7561900F17B0C /* GesturesAndAnimationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00948AA127D7561900F17B0C /* GesturesAndAnimationsViewController.swift */; };
+		00B6A88F27F217ED001524AE /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B6A88E27F217ED001524AE /* testViewController.swift */; };
 		00C78CC327EB63FD00211DFC /* DetailedPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C78CC227EB63FD00211DFC /* DetailedPhotosViewController.swift */; };
 		00C78CC527EB7B9100211DFC /* DetailedPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C78CC427EB7B9100211DFC /* DetailedPostViewController.swift */; };
 		00D7B37A27B91FD900C7E906 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D7B37927B91FD900C7E906 /* MainTabBarController.swift */; };
@@ -49,6 +50,7 @@
 		00948A9D27D72D8E00F17B0C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		00948A9F27D72E4C00F17B0C /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		00948AA127D7561900F17B0C /* GesturesAndAnimationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesAndAnimationsViewController.swift; sourceTree = "<group>"; };
+		00B6A88E27F217ED001524AE /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		00C78CC227EB63FD00211DFC /* DetailedPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPhotosViewController.swift; sourceTree = "<group>"; };
 		00C78CC427EB7B9100211DFC /* DetailedPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPostViewController.swift; sourceTree = "<group>"; };
 		00D7B37927B91FD900C7E906 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				00948A9D27D72D8E00F17B0C /* PhotosViewController.swift */,
 				00D7B37F27B9213600C7E906 /* PostViewController.swift */,
 				00D7B38127B9216B00C7E906 /* ProfileViewController.swift */,
+				00B6A88E27F217ED001524AE /* testViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				00D7B38227B9216B00C7E906 /* ProfileViewController.swift in Sources */,
 				00948AA227D7561900F17B0C /* GesturesAndAnimationsViewController.swift in Sources */,
 				0045CF3427C666E10081FA60 /* PostTableViewCell.swift in Sources */,
+				00B6A88F27F217ED001524AE /* testViewController.swift in Sources */,
 				00948A9E27D72D8E00F17B0C /* PhotosViewController.swift in Sources */,
 				00F327C727ABF22E009A8CE5 /* SceneDelegate.swift in Sources */,
 				0021C7D527EA3BF3004BC53D /* ExtensionUIView.swift in Sources */,

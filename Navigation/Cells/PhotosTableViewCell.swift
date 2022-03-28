@@ -43,10 +43,8 @@ class PhotosTableViewCell: UITableViewCell {
         
     private lazy var collectionLabel: UILabel = {
         let label = UILabel()
-     //   label.font = UIFont.systemFont(ofSize: 24.0, weight: .bold)
         label.font = UIFont.systemFont(ofSize: 14.0, weight: .bold)
         label.textColor = .black
-   //     label.text = "Photos"
         label.text = "ФОТОГРАФИИ"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

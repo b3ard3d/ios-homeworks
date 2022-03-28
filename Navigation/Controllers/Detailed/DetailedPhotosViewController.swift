@@ -13,13 +13,13 @@ class DetailedPhotoViewController: UIViewController {
     
     private lazy var alphaView: UIView = {
         let view = UIView()
-        view.alpha = 0.9
+        view.alpha = 0.8
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var detailedPhotoImage: UIImageView = {
+     lazy var detailedPhotoImage: UIImageView = {
         let imageView = UIImageView()
         if let image = selectedImage {
             imageView.image = UIImage(named: image)
@@ -29,7 +29,7 @@ class DetailedPhotoViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var closeButton: UIButton = {
+     lazy var closeButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
@@ -46,9 +46,9 @@ class DetailedPhotoViewController: UIViewController {
     
     private func setupView() {
         view.addSubview(alphaView)
-        view.addSubview(closeButton)
+   //     view.addSubview(closeButton)
         view.addSubview(detailedPhotoImage)
-        view.backgroundColor = .clear
+        view.backgroundColor = .white
         
         NSLayoutConstraint.activate([
             detailedPhotoImage.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
@@ -58,16 +58,15 @@ class DetailedPhotoViewController: UIViewController {
             alphaView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             alphaView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             alphaView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+    /*        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             closeButton.heightAnchor.constraint(equalToConstant: 40),
-            closeButton.widthAnchor.constraint(equalToConstant: 40)
-
+            closeButton.widthAnchor.constraint(equalToConstant: 40)     */
         ])
     }
     
     @objc private func didTapCloseButton() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 }
 

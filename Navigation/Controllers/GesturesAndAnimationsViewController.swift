@@ -131,18 +131,16 @@ final class GesturesAndAnimationsViewController: UIViewController {
         self.avatarViewCenterYConstraint?.constant = -1 * (screenHeight * 0.5 - 166)
         self.avatarViewHeightConstraint?.constant = 150
         self.avatarViewWidthConstraint?.constant = 150
+        self.closeButton.alpha = 0
         
         UIView.animate(withDuration: 0.5) {
             self.avatarView.layer.cornerRadius = 75
             self.alphaView.alpha = 0
             self.view.layoutIfNeeded()
-            
-            self.closeButton.alpha = 0
-
+    //        self.closeButton.alpha = 0
         } completion: { _ in
             self.closeButton.isHidden = false
             self.isExpanded = false
-            
         }
     }
 }

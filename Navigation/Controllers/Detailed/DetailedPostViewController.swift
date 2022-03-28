@@ -8,6 +8,10 @@
 import UIKit
 
 class DetailedPostViewController: UIViewController {
+    
+    var likedDelegate: TapLikedDelegate?
+    
+//    var tempCountLiked: Int?
         
     var selectedDataAuthor, selectedDataDescription, selectedDataImage: String?
     var selectedDataLikes, selectedDataViews: Int?
@@ -30,6 +34,7 @@ class DetailedPostViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 10
+        stackView.isUserInteractionEnabled = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -81,14 +86,20 @@ class DetailedPostViewController: UIViewController {
         return label
     }()
 
-    private lazy var likesLabel: UILabel = {
+     lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
         if let likes = selectedDataLikes {
             label.text = "Likes: " + String(likes)
         }
-        label.font = UIFont(name: "System", size: 16)
+        label.font = UIFont(name: "System", size: 14)
         label.textColor = .black
+        
+     //   let tap = UITapGestureRecognizer(target: self, action: #selector(tapLiked))
+     //    label.addGestureRecognizer(tap)
+
+        label.isUserInteractionEnabled = true
+        
         
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -100,16 +111,25 @@ class DetailedPostViewController: UIViewController {
         if let views = selectedDataViews {
             label.text = "Views: " + String(views)
         }
-        label.font = UIFont(name: "System", size: 16)
+        label.font = UIFont(name: "System", size: 14)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private let tapGestureRecognizer = UITapGestureRecognizer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupView()
+        setupGesture()
+    }
+    
+    func likeLabelCount() -> Int? {
+        guard let tempCountLiked = Int(self.likesLabel.text!.dropFirst(7)) else { return nil}
+        print(tempCountLiked)
+        return tempCountLiked
     }
     
     private func setupNavigationBar() {
@@ -127,6 +147,11 @@ class DetailedPostViewController: UIViewController {
         stackViewPost.addArrangedSubview(stackViewLikesViews)
         stackViewLikesViews.addArrangedSubview(likesLabel)
         stackViewLikesViews.addArrangedSubview(viewsLabel)
+        
+    //    scrollView.isUserInteractionEnabled = false
+    //    contentView.isUserInteractionEnabled = false
+        view.bringSubviewToFront(stackViewLikesViews)
+
         view.backgroundColor = .white
         
         NSLayoutConstraint.activate([
@@ -142,8 +167,24 @@ class DetailedPostViewController: UIViewController {
        
             stackViewPost.topAnchor.constraint(equalTo: contentView.topAnchor),
             stackViewPost.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            stackViewPost.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stackViewPost.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            stackViewPost.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 6),
+            stackViewPost.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -6)
         ])
+    }
+    
+    private func setupGesture() {
+        self.tapGestureRecognizer.addTarget(self, action: #selector(self.tapLiked(_ :)))
+        self.likesLabel.addGestureRecognizer(self.tapGestureRecognizer)
+    }
+    
+    @objc func tapLiked(_ gestureRecognizer: UITapGestureRecognizer) {
+        guard self.tapGestureRecognizer === gestureRecognizer else { return }
+       
+        likedDelegate?.tapLikedLabel()
+        print("200394")
+        guard let newCount = Int(self.likesLabel.text!.dropFirst(7)) else { return }
+        self.likesLabel.text = "Likes: " + String(newCount + 1)
+        likesLabel.layoutIfNeeded()
+        
     }
 }

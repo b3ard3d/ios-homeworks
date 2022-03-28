@@ -61,8 +61,6 @@ class PostTableViewCell: UITableViewCell {
     lazy var imageImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .black
-        
-
         imageView.contentMode = .scaleAspectFit
         imageView.setContentCompressionResistancePriority(UILayoutPriority(100), for: .vertical)
         imageView.isUserInteractionEnabled = true
@@ -82,13 +80,11 @@ class PostTableViewCell: UITableViewCell {
     lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.font = UIFont(name: "System", size: 16)
+        label.font = UIFont(name: "System", size: 14)
         label.textColor = .black
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapLiked))
         label.isUserInteractionEnabled = true
         label.addGestureRecognizer(tap)
-
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -96,7 +92,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var viewsLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.font = UIFont(name: "System", size: 16)
+        label.font = UIFont(name: "System", size: 14)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -131,21 +127,13 @@ class PostTableViewCell: UITableViewCell {
         stackViewLikesViews.addArrangedSubview(likesLabel)
         stackViewLikesViews.addArrangedSubview(viewsLabel)
         stackViewPost.backgroundColor = .white
-        backViewConstraints()
-        stackViewPostConstraints()
-    }
-    
-    private func backViewConstraints() {
+
         NSLayoutConstraint.activate([
             backView.topAnchor.constraint(equalTo: contentView.topAnchor),
             backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
-    }
-    
-    private func stackViewPostConstraints() {
-        NSLayoutConstraint.activate([
+            backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
             stackViewPost.topAnchor.constraint(equalTo: backView.topAnchor),
             stackViewPost.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 16),
             stackViewPost.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -16),
@@ -159,7 +147,6 @@ class PostTableViewCell: UITableViewCell {
         self.descriptionLabel.text = viewModel.description
         self.likesLabel.text = "Likes: " + String(viewModel.likes)
         self.viewsLabel.text = "Views: " + String(viewModel.views)
-        
     }
     
     @objc func tapLiked() {

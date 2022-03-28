@@ -53,7 +53,7 @@ final class LogInViewController: UIViewController {
         textField.textColor = .black
         textField.autocapitalizationType = .none
         textField.font = .systemFont(ofSize: 16)
-        textField.placeholder = "Email or phone"
+        textField.placeholder = "Email или телефон"
         textField.layer.borderWidth = 0.5
         textField.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
@@ -69,7 +69,7 @@ final class LogInViewController: UIViewController {
         textField.textColor = .black
         textField.autocapitalizationType = .none
         textField.font = .systemFont(ofSize: 16)
-        textField.placeholder = "Password"
+        textField.placeholder = "Пароль"
         textField.layer.borderWidth = 0.5
         textField.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
@@ -80,7 +80,7 @@ final class LogInViewController: UIViewController {
     
     private lazy var logInButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Log In", for: .normal)
+        button.setTitle("Войти", for: .normal)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -92,7 +92,6 @@ final class LogInViewController: UIViewController {
     private lazy var invalidLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Password error"
         label.textAlignment = .left
         label.textColor = .lightGray
         label.font = .systemFont(ofSize: 12)

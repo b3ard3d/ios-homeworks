@@ -10,7 +10,7 @@ import UIKit
 final class ProfileViewController: UIViewController, TapLikedDelegate {
       
     private let profileHeaderView = ProfileHeaderView()
-    
+        
     private let detailedAvatarView: DetailedAvatarView = {
         let avatarView = DetailedAvatarView()
         avatarView.translatesAutoresizingMaskIntoConstraints = false
@@ -18,13 +18,11 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
     }()
     
     var liked: Bool = false
-    
- //   var isTapLiked: Bool = false
         
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 44
+   //     tableView.rowHeight = UITableView.automaticDimension
+   //     tableView.estimatedRowHeight = 44
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
@@ -33,7 +31,6 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
         tableView.backgroundColor = .systemGray6
         tableView.layer.borderColor = UIColor.lightGray.cgColor
         tableView.layer.borderWidth = 0.5
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -51,7 +48,7 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
     }
     
     func tapLikedLabel() {
-        liked = true
+        liked.toggle()
     //    liked = true
         self.tableView.reloadData()
     }
@@ -65,7 +62,7 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
     private func setupView() {
         view.backgroundColor = .systemGray6
         view.addSubview(tableView)
-        view.addSubview(detailedAvatarView)
+   //     view.addSubview(detailedAvatarView)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -73,10 +70,10 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            detailedAvatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+    /*        detailedAvatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             detailedAvatarView.leftAnchor.constraint(equalTo: view.leftAnchor),
             detailedAvatarView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            detailedAvatarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            detailedAvatarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)      */
         ])
     }
     
@@ -85,6 +82,7 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
         self.dataSource.append(.init(author: "Займись собой", description: "Мы выросли на их примере, а это не может не радовать", image: "post2", likes: 25, views: 50))
         self.dataSource.append(.init(author: "Kay May", description: "S13 в родном окрасе", image: "post3", likes: 10, views: 15))
         self.dataSource.append(.init(author: "Sport Factor", description: "Тренировки тренировками, а сон по расписанию", image: "post4", likes: 52, views: 60))
+        self.dataSource.append(.init(author: "Toyo Tires Russia", description: "Ландин Уильямс получил водительские права больше десяти лет назад, во времена, когда начала выходить серия фильмов «Форсаж». Помимо этого культового кинофильма Ландин «подсел» на не менее культовый японский мультсериал о дрифте Initial D", image: "post5", likes: 30, views: 40))
     }
     
     private func setupGesture() {
@@ -94,10 +92,8 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
     
     @objc func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer){
         guard self.tapGestureRecognizer === gestureRecognizer else { return }
-        
         let viewController = DetailedAvatarViewController()
         present(viewController, animated: true)
-        
    /*     UIView.animate(withDuration: 0.5) {
             self.detailedAvatarView.alpha = 0.95
         }   */
@@ -116,18 +112,16 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.selectionStyle = .none
             return cell
         } else {
-            
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as? PostTableViewCell else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
                     return cell
                 }
-        //    print(indexPath.row)
             cell.likedDelegate = self
             
             if liked {
                 dataSource[indexPath.row - 1].likes += 1
-                liked = false
-                print(indexPath.row)
+            //    liked = false
+                liked.toggle()
             }
             
             let article = self.dataSource[indexPath.row - 1]
@@ -137,7 +131,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                                                         likes: article.likes,
                                                         views: article.views)
             cell.setup(with: viewModel)
-            
             return cell
         }
     }
@@ -152,7 +145,17 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView( _ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-        self.navigationController?.pushViewController(PhotosViewController(), animated: true)
+            self.navigationController?.pushViewController(PhotosViewController(), animated: true)
+  /*         let vc = PhotosViewController()
+            
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(vc, animated: true)      */
+            
+      /*      let viewController = PhotosViewController()
+            
+            viewController.modalPresentationStyle = .fullScreen
+            
+            present(viewController, animated: true)     */
         } else {
             let viewController = DetailedPostViewController()
             viewController.selectedDataImage = dataSource[indexPath.row - 1].image

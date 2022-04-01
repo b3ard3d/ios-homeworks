@@ -61,7 +61,6 @@ final class ProfileHeaderView: UIView {
         textField.returnKeyType = .next
         textField.keyboardType = .default
         textField.clearButtonMode = .always
-   //     textField.alpha = 0
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -108,34 +107,20 @@ final class ProfileHeaderView: UIView {
     
     @objc func tapKeyboardOff(_ sender: Any) {
         statusTextField.resignFirstResponder()
-  /*      if self.statusTextField.text == "" {
-            UIView.animate(withDuration: 0.5) {
-                self.statusTextField.alpha = 0
-            } completion: { _ in
-            }
-        }       */
     }
     
     @objc private func didTapSetStatusButton() {
         guard let status = statusTextField.text else {return}
-    /*    if statusTextField.alpha == 0 {
+        if !status.isEmpty {
             UIView.animate(withDuration: 0.5) {
-                self.statusTextField.alpha = 1
+                self.statusLabel.text = self.statusTextField.text
+                self.statusTextField.text = .none
             } completion: { _ in
             }
-        } else {    */
-            if !status.isEmpty {
-                UIView.animate(withDuration: 0.5) {
-                    self.statusLabel.text = self.statusTextField.text
-                    self.statusTextField.text = .none
-             //       self.statusTextField.alpha = 0
-                } completion: { _ in
-                }
-            }
-            if status.isEmpty {
-                statusTextField.shake()
-            }
-            endEditing(true)
-   //     }
+        }
+        if status.isEmpty {
+            statusTextField.shake()
+        }
+        endEditing(true)
     }
 }

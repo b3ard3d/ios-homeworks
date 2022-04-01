@@ -23,7 +23,7 @@ class DetailedAvatarViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var closeButton: UIButton = {
+    lazy var closeButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
@@ -47,7 +47,8 @@ class DetailedAvatarViewController: UIViewController {
         view.backgroundColor = .clear
         
         NSLayoutConstraint.activate([
-            detailedAvatarImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+           detailedAvatarImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             detailedAvatarImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             detailedAvatarImage.heightAnchor.constraint(equalToConstant: screenWidth),
             detailedAvatarImage.widthAnchor.constraint(equalToConstant: screenWidth),

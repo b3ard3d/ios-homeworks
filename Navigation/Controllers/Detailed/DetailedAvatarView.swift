@@ -19,7 +19,6 @@ class DetailedAvatarView: UIView {
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "photo"))
-        imageView.layer.cornerRadius = 75
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
@@ -42,7 +41,6 @@ class DetailedAvatarView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        self.backgroundColor = .clear
         self.alpha = 0
     }
     
@@ -51,12 +49,15 @@ class DetailedAvatarView: UIView {
     }
     
     private func setupView() {
-        
         self.addSubview(alphaView)
         self.addSubview(closeButton)
         self.addSubview(avatarImageView)
                     
         NSLayoutConstraint.activate([
+            alphaView.topAnchor.constraint(equalTo: self.topAnchor),
+            alphaView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            alphaView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            alphaView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             avatarImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             avatarImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             avatarImageView.heightAnchor.constraint(equalToConstant: screenWidth),

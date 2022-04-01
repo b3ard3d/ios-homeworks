@@ -107,10 +107,8 @@ final class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.configureSubviews()
+        self.setupView()
         self.setupConstraints()
-        
-        navigationItem.backButtonTitle = ""
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapKeyboardOff(_:)))
         view.addGestureRecognizer(tap)
@@ -128,7 +126,8 @@ final class LogInViewController: UIViewController {
         super.viewDidDisappear(animated)
     }
     
-    private func configureSubviews() {
+    private func setupView() {
+        navigationItem.backButtonTitle = ""
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(logInButton)
@@ -234,11 +233,7 @@ final class LogInViewController: UIViewController {
             let screenHeight = UIScreen.main.bounds.height
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            
-            
-
-           // self.scrollView.contentOffset = CGPoint(x: 0, y: yOffset)
-            
+          //  self.scrollView.contentOffset = CGPoint(x: 0, y: yOffset)
             let difference = keyboardHeight - ((screenHeight / 2) - 165)
             if ((screenHeight / 2) - 165) <= keyboardHeight {
                 let contentOffset: CGPoint = notification.name == UIResponder.keyboardWillHideNotification ? .zero : CGPoint(x: 0, y:  difference)

@@ -8,6 +8,8 @@
 import Foundation
 
 struct Posts: Equatable {
-    let author, description, image: String
+    let author, description, image, id: String
     var likes, views: Int
 }
+
+var dataSource: [Posts] = []

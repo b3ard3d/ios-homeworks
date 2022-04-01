@@ -10,13 +10,12 @@ import UIKit
 final class ProfileViewController: UIViewController, TapLikedDelegate {
       
     private let profileHeaderView = ProfileHeaderView()
-        
     private let detailedAvatarView: DetailedAvatarView = {
         let avatarView = DetailedAvatarView()
         avatarView.translatesAutoresizingMaskIntoConstraints = false
         return avatarView
     }()
-    
+        
     var liked: Bool = false
         
     private lazy var tableView: UITableView = {
@@ -36,20 +35,27 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
     }()
     
     private let tapGestureRecognizer = UITapGestureRecognizer()
-        
-    private var dataSource: [Posts] = []
-    
+            
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupNavigationBar()
         self.setupView()
         self.addDataSource()
-        self.setupGesture()
+        self.setupGesture()        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+   //     tableView.reloadData()
     }
     
     func tapLikedLabel() {
         liked.toggle()
-    //    liked = true
         self.tableView.reloadData()
     }
     
@@ -62,27 +68,29 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
     private func setupView() {
         view.backgroundColor = .systemGray6
         view.addSubview(tableView)
-   //     view.addSubview(detailedAvatarView)
-        
+        view.addSubview(detailedAvatarView)
+  //      navigationController?.navigationBar.alpha = 0.9
+  //      navigationController?.tabBarController?.tabBar.alpha = 0.9
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-    /*        detailedAvatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            detailedAvatarView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            detailedAvatarView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            detailedAvatarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)      */
+            detailedAvatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            detailedAvatarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            detailedAvatarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            detailedAvatarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            detailedAvatarView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     
     private func addDataSource() {
-        self.dataSource.append(.init(author: "Аркадий Цареградцев", description: "Тот случай, когда фан-арт полностью вышел из под контроля! ", image: "post1", likes: 5, views: 5))
-        self.dataSource.append(.init(author: "Займись собой", description: "Мы выросли на их примере, а это не может не радовать", image: "post2", likes: 25, views: 50))
-        self.dataSource.append(.init(author: "Kay May", description: "S13 в родном окрасе", image: "post3", likes: 10, views: 15))
-        self.dataSource.append(.init(author: "Sport Factor", description: "Тренировки тренировками, а сон по расписанию", image: "post4", likes: 52, views: 60))
-        self.dataSource.append(.init(author: "Toyo Tires Russia", description: "Ландин Уильямс получил водительские права больше десяти лет назад, во времена, когда начала выходить серия фильмов «Форсаж». Помимо этого культового кинофильма Ландин «подсел» на не менее культовый японский мультсериал о дрифте Initial D", image: "post5", likes: 30, views: 40))
+        dataSource.append(.init(author: "Аркадий Цареградцев", description: "Тот случай, когда фан-арт полностью вышел из под контроля! ", image: "post1", id: "001", likes: 5, views: 5))
+        dataSource.append(.init(author: "Займись собой", description: "Мы выросли на их примере, а это не может не радовать", image: "post2", id: "002", likes: 25, views: 50))
+        dataSource.append(.init(author: "Kay May", description: "S13 в родном окрасе", image: "post3", id: "003", likes: 10, views: 15))
+        dataSource.append(.init(author: "Sport Factor", description: "Тренировки тренировками, а сон по расписанию", image: "post4", id: "004", likes: 52, views: 60))
+        dataSource.append(.init(author: "Toyo Tires Russia", description: "Ландин Уильямс получил водительские права больше десяти лет назад, во времена, когда начала выходить серия фильмов «Форсаж». Помимо этого культового кинофильма Ландин «подсел» на не менее культовый японский мультсериал о дрифте Initial D", image: "post5", id: "005", likes: 30, views: 40))
     }
     
     private func setupGesture() {
@@ -92,18 +100,26 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
     
     @objc func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer){
         guard self.tapGestureRecognizer === gestureRecognizer else { return }
-        let viewController = DetailedAvatarViewController()
-        present(viewController, animated: true)
-   /*     UIView.animate(withDuration: 0.5) {
-            self.detailedAvatarView.alpha = 0.95
-        }   */
+   //     let viewController = DetailedAvatarViewController()
+   //     present(viewController, animated: true)
+        UIView.animate(withDuration: 0.5) {
+            self.detailedAvatarView.alpha = 1
+        }
+ //       presentDetailedAvatarViewController()
+    }
+    
+    func presentDetailedAvatarViewController() {
+        let secondViewController = DetailedAvatarViewController()
+        secondViewController.transitioningDelegate = self
+        secondViewController.modalPresentationStyle = .fullScreen
+        present(secondViewController, animated: true)
     }
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.count + 1
+        return dataSource.count + 1
     }
             
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,14 +133,13 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                     return cell
                 }
             cell.likedDelegate = self
-            
+                        
             if liked {
                 dataSource[indexPath.row - 1].likes += 1
-            //    liked = false
                 liked.toggle()
             }
-            
-            let article = self.dataSource[indexPath.row - 1]
+                        
+            let article = dataSource[indexPath.row - 1]
             let viewModel = PostTableViewCell.ViewModel(author: article.author,
                                                         image: article.image,
                                                         description: article.description,
@@ -146,16 +161,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView( _ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             self.navigationController?.pushViewController(PhotosViewController(), animated: true)
-  /*         let vc = PhotosViewController()
-            
-            vc.modalPresentationStyle = .fullScreen
-            self.navigationController?.present(vc, animated: true)      */
-            
-      /*      let viewController = PhotosViewController()
-            
-            viewController.modalPresentationStyle = .fullScreen
-            
-            present(viewController, animated: true)     */
         } else {
             let viewController = DetailedPostViewController()
             viewController.selectedDataImage = dataSource[indexPath.row - 1].image
@@ -163,9 +168,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             viewController.selectedDataViews = dataSource[indexPath.row - 1].views + 1
             viewController.selectedDataAuthor = dataSource[indexPath.row - 1].author
             viewController.selectedDataDescription = dataSource[indexPath.row - 1].description
+            viewController.selectedId = dataSource[indexPath.row - 1].id
             dataSource[indexPath.row - 1].views += 1
             self.tableView.reloadRows(at: [indexPath], with: .none)
-      //      present(viewController, animated: true)
             navigationController?.pushViewController(viewController, animated: true)
         }
     }
@@ -174,12 +179,22 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row != 0 {
             let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") {
                 (contextualAction, view, boolValue) in
-                self.dataSource.remove(at: indexPath.row - 1)
+                dataSource.remove(at: indexPath.row - 1)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
             let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
             return swipeActions
         }
         else { return nil }
+    }
+}
+
+extension ProfileViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return AvatarTransitionAnimator(presentationImageView: profileHeaderView.avatarImageView, isPresenting: true)
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return AvatarTransitionAnimator(presentationImageView: profileHeaderView.avatarImageView, isPresenting: false)
     }
 }

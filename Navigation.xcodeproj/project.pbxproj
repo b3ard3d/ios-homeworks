@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001470D827F6181B00F436E4 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001470D727F6181B00F436E4 /* TestView.swift */; };
 		0021C7D227EA3070004BC53D /* ValidationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0021C7D127EA3070004BC53D /* ValidationData.swift */; };
 		0021C7D527EA3BF3004BC53D /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0021C7D427EA3BF3004BC53D /* ExtensionUIView.swift */; };
 		0040B7DF27ECC93A00F25458 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040B7DE27ECC93A00F25458 /* Protocols.swift */; };
@@ -21,7 +22,7 @@
 		00948A9E27D72D8E00F17B0C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00948A9D27D72D8E00F17B0C /* PhotosViewController.swift */; };
 		00948AA027D72E4C00F17B0C /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00948A9F27D72E4C00F17B0C /* Photos.swift */; };
 		00948AA227D7561900F17B0C /* GesturesAndAnimationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00948AA127D7561900F17B0C /* GesturesAndAnimationsViewController.swift */; };
-		00B6A88F27F217ED001524AE /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B6A88E27F217ED001524AE /* testViewController.swift */; };
+		00B6A89327F22F5A001524AE /* AvatarTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B6A89227F22F5A001524AE /* AvatarTransitionAnimator.swift */; };
 		00C78CC327EB63FD00211DFC /* DetailedPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C78CC227EB63FD00211DFC /* DetailedPhotosViewController.swift */; };
 		00C78CC527EB7B9100211DFC /* DetailedPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C78CC427EB7B9100211DFC /* DetailedPostViewController.swift */; };
 		00D7B37A27B91FD900C7E906 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D7B37927B91FD900C7E906 /* MainTabBarController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		001470D727F6181B00F436E4 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		0021C7D127EA3070004BC53D /* ValidationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationData.swift; sourceTree = "<group>"; };
 		0021C7D427EA3BF3004BC53D /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		0040B7DE27ECC93A00F25458 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -50,7 +52,7 @@
 		00948A9D27D72D8E00F17B0C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		00948A9F27D72E4C00F17B0C /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		00948AA127D7561900F17B0C /* GesturesAndAnimationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesAndAnimationsViewController.swift; sourceTree = "<group>"; };
-		00B6A88E27F217ED001524AE /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
+		00B6A89227F22F5A001524AE /* AvatarTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTransitionAnimator.swift; sourceTree = "<group>"; };
 		00C78CC227EB63FD00211DFC /* DetailedPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPhotosViewController.swift; sourceTree = "<group>"; };
 		00C78CC427EB7B9100211DFC /* DetailedPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPostViewController.swift; sourceTree = "<group>"; };
 		00D7B37927B91FD900C7E906 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		00A1910927F35B5D0098C573 /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				00B6A89227F22F5A001524AE /* AvatarTransitionAnimator.swift */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
 		00C78CC627EB7BA600211DFC /* Detailed */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +147,7 @@
 				0040B7E227ECF0CA00F25458 /* DetailedAvatarViewController.swift */,
 				00C78CC227EB63FD00211DFC /* DetailedPhotosViewController.swift */,
 				00C78CC427EB7B9100211DFC /* DetailedPostViewController.swift */,
+				001470D727F6181B00F436E4 /* TestView.swift */,
 			);
 			path = Detailed;
 			sourceTree = "<group>";
@@ -144,6 +155,7 @@
 		00E0F0C127D7BA5900445328 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				00A1910927F35B5D0098C573 /* Animator */,
 				00C78CC627EB7BA600211DFC /* Detailed */,
 				00D7B37B27B9208500C7E906 /* FeedViewController.swift */,
 				00948AA127D7561900F17B0C /* GesturesAndAnimationsViewController.swift */,
@@ -153,7 +165,6 @@
 				00948A9D27D72D8E00F17B0C /* PhotosViewController.swift */,
 				00D7B37F27B9213600C7E906 /* PostViewController.swift */,
 				00D7B38127B9216B00C7E906 /* ProfileViewController.swift */,
-				00B6A88E27F217ED001524AE /* testViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -270,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00948A9A27D7260100F17B0C /* PhotosTableViewCell.swift in Sources */,
+				001470D827F6181B00F436E4 /* TestView.swift in Sources */,
 				00F327C527ABF22E009A8CE5 /* AppDelegate.swift in Sources */,
 				0045CF3627C67E1E0081FA60 /* Post.swift in Sources */,
 				00948AA027D72E4C00F17B0C /* Photos.swift in Sources */,
@@ -278,6 +290,7 @@
 				00D7B38027B9213600C7E906 /* PostViewController.swift in Sources */,
 				00948A9C27D72CD900F17B0C /* PhotosCollectionViewCell.swift in Sources */,
 				0040B7E327ECF0CA00F25458 /* DetailedAvatarViewController.swift in Sources */,
+				00B6A89327F22F5A001524AE /* AvatarTransitionAnimator.swift in Sources */,
 				0045CF2E27C548590081FA60 /* LogInViewController.swift in Sources */,
 				00C78CC527EB7B9100211DFC /* DetailedPostViewController.swift in Sources */,
 				0040B7DF27ECC93A00F25458 /* Protocols.swift in Sources */,
@@ -287,7 +300,6 @@
 				00D7B38227B9216B00C7E906 /* ProfileViewController.swift in Sources */,
 				00948AA227D7561900F17B0C /* GesturesAndAnimationsViewController.swift in Sources */,
 				0045CF3427C666E10081FA60 /* PostTableViewCell.swift in Sources */,
-				00B6A88F27F217ED001524AE /* testViewController.swift in Sources */,
 				00948A9E27D72D8E00F17B0C /* PhotosViewController.swift in Sources */,
 				00F327C727ABF22E009A8CE5 /* SceneDelegate.swift in Sources */,
 				0021C7D527EA3BF3004BC53D /* ExtensionUIView.swift in Sources */,

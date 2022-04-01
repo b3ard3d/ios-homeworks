@@ -52,10 +52,10 @@ class FeedViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = false
         view.backgroundColor = .white
         title = "Лента"
-        self.drawSelf()
+        self.setupView()
     }
     
-    private func drawSelf() {
+    private func setupView() {
         self.view.addSubview(stackView)
         self.stackView.addArrangedSubview(oneButton)
         self.stackView.addArrangedSubview(twoButton)

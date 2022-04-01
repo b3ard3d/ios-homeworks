@@ -29,7 +29,7 @@ class DetailedPhotoViewController: UIViewController {
         return imageView
     }()
     
-     lazy var closeButton: UIButton = {
+  /*   lazy var closeButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
@@ -37,7 +37,7 @@ class DetailedPhotoViewController: UIViewController {
         button.addTarget(self, action: #selector(self.didTapCloseButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-    }()
+    }()     */
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -40,7 +40,8 @@ class PostTableViewCell: UITableViewCell {
     private lazy var stackViewLikesViews: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 10
+        stackView.spacing = 120
+        stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -63,7 +64,7 @@ class PostTableViewCell: UITableViewCell {
         imageView.backgroundColor = .black
         imageView.contentMode = .scaleAspectFit
         imageView.setContentCompressionResistancePriority(UILayoutPriority(100), for: .vertical)
-        imageView.isUserInteractionEnabled = true
+   //     imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -94,6 +95,7 @@ class PostTableViewCell: UITableViewCell {
         label.backgroundColor = .clear
         label.font = UIFont(name: "System", size: 14)
         label.textColor = .black
+        label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -134,10 +136,10 @@ class PostTableViewCell: UITableViewCell {
             backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            stackViewPost.topAnchor.constraint(equalTo: backView.topAnchor),
+            stackViewPost.topAnchor.constraint(equalTo: backView.topAnchor, constant: 6),
             stackViewPost.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 16),
             stackViewPost.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -16),
-            stackViewPost.bottomAnchor.constraint(equalTo: backView.bottomAnchor)
+            stackViewPost.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -6)
         ])
     }
     

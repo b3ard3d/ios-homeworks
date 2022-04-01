@@ -8,12 +8,8 @@
 import UIKit
 
 class DetailedPostViewController: UIViewController {
-    
-    var likedDelegate: TapLikedDelegate?
-    
-//    var tempCountLiked: Int?
-        
-    var selectedDataAuthor, selectedDataDescription, selectedDataImage: String?
+                
+    var selectedDataAuthor, selectedDataDescription, selectedDataImage, selectedId: String?
     var selectedDataLikes, selectedDataViews: Int?
     
     private lazy var scrollView: UIScrollView = {
@@ -34,7 +30,7 @@ class DetailedPostViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 10
-        stackView.isUserInteractionEnabled = false
+   //     stackView.isUserInteractionEnabled = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -42,8 +38,10 @@ class DetailedPostViewController: UIViewController {
     private lazy var stackViewLikesViews: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        stackView.spacing = 120
         stackView.backgroundColor = .white
+        stackView.isUserInteractionEnabled = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -62,7 +60,7 @@ class DetailedPostViewController: UIViewController {
         return label
     }()
     
-    lazy var imageImageView: UIImageView = {
+    private lazy var imageImageView: UIImageView = {
         let imageView = UIImageView()
         if let image = selectedDataImage {
             imageView.image = UIImage(named: image)
@@ -86,7 +84,7 @@ class DetailedPostViewController: UIViewController {
         return label
     }()
 
-     lazy var likesLabel: UILabel = {
+    lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
         if let likes = selectedDataLikes {
@@ -94,13 +92,7 @@ class DetailedPostViewController: UIViewController {
         }
         label.font = UIFont(name: "System", size: 14)
         label.textColor = .black
-        
-     //   let tap = UITapGestureRecognizer(target: self, action: #selector(tapLiked))
-     //    label.addGestureRecognizer(tap)
-
         label.isUserInteractionEnabled = true
-        
-        
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -112,6 +104,7 @@ class DetailedPostViewController: UIViewController {
             label.text = "Views: " + String(views)
         }
         label.font = UIFont(name: "System", size: 14)
+        label.textAlignment = .right
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -126,12 +119,6 @@ class DetailedPostViewController: UIViewController {
         setupGesture()
     }
     
-    func likeLabelCount() -> Int? {
-        guard let tempCountLiked = Int(self.likesLabel.text!.dropFirst(7)) else { return nil}
-        print(tempCountLiked)
-        return tempCountLiked
-    }
-    
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.title = "Запись"
@@ -141,16 +128,15 @@ class DetailedPostViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(stackViewPost)
+        
+        scrollView.addSubview(stackViewLikesViews)
+        
         stackViewPost.addArrangedSubview(authorLabel)
         stackViewPost.addArrangedSubview(imageImageView)
         stackViewPost.addArrangedSubview(descriptionLabel)
-        stackViewPost.addArrangedSubview(stackViewLikesViews)
+
         stackViewLikesViews.addArrangedSubview(likesLabel)
         stackViewLikesViews.addArrangedSubview(viewsLabel)
-        
-    //    scrollView.isUserInteractionEnabled = false
-    //    contentView.isUserInteractionEnabled = false
-        view.bringSubviewToFront(stackViewLikesViews)
 
         view.backgroundColor = .white
         
@@ -161,14 +147,18 @@ class DetailedPostViewController: UIViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -36),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
        
             stackViewPost.topAnchor.constraint(equalTo: contentView.topAnchor),
             stackViewPost.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             stackViewPost.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 6),
-            stackViewPost.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -6)
+            stackViewPost.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -6),
+            
+            stackViewLikesViews.topAnchor.constraint(equalTo: stackViewPost.bottomAnchor, constant: 6),
+            stackViewLikesViews.leadingAnchor.constraint(equalTo: stackViewPost.leadingAnchor),
+            stackViewLikesViews.trailingAnchor.constraint(equalTo: stackViewPost.trailingAnchor)
         ])
     }
     
@@ -180,11 +170,12 @@ class DetailedPostViewController: UIViewController {
     @objc func tapLiked(_ gestureRecognizer: UITapGestureRecognizer) {
         guard self.tapGestureRecognizer === gestureRecognizer else { return }
        
-        likedDelegate?.tapLikedLabel()
-        print("200394")
-        guard let newCount = Int(self.likesLabel.text!.dropFirst(7)) else { return }
-        self.likesLabel.text = "Likes: " + String(newCount + 1)
-        likesLabel.layoutIfNeeded()
-        
+        for i in 0...dataSource.count - 1 {
+            if dataSource[i].id == selectedId {
+                dataSource[i].likes += 1
+                likesLabel.text = "Likes: " + String(dataSource[i].likes)
+                likesLabel.layoutIfNeeded()
+            }
+        }
     }
 }
